@@ -16,5 +16,10 @@ public class Noeud{
     public Noeud(int idNoeud){
         this.idNoeud = idNoeud;
     }
+
+    public double distance(Noeud n2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
 

@@ -24,6 +24,32 @@ public class Barre {
         this.n2 = n2;
         this.type = type;
     }
+
+    public int getIdBarre() {
+        return idBarre;
+    }
+
+    public Noeud getN1() {
+        return n1;
+    }
+
+    public Noeud getN2() {
+        return n2;
+    }
+
+    public TypeBarre getType() {
+        return type;
+    }
     
-    
+    public double longueur() {
+        Barre barre;
+        return this.n1.distance(this.n2);
+    }
+
+    @Override
+    public String toString() {
+        return "Barre{" + "idBarre=" + idBarre + ", n1=" + n1 + ", n2=" + n2 + ", type=" + type + '}';
+    }
 }
+    
+
