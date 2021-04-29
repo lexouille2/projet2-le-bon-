@@ -5,6 +5,7 @@
  */
 package fr.insa.jacob.projet.projet2;
 
+import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import javafx.scene.layout.Pane;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,9 +16,12 @@ import javafx.scene.paint.Color;
  */
 public class DessinCanvas extends Pane{
     
+    private MainPane main;
+    
     private Canvas realCanvas;
     
-    public DessinCanvas(){
+    public DessinCanvas(MainPane main){
+        this.main = main;
         this.realCanvas = new Canvas(this.getWidth(), this.getHeight());
         this.getChildren().add(this.realCanvas);
         //System.out.println("w = " + this.getWidth() + ", h =" + this.getHeight());
@@ -35,8 +39,8 @@ public class DessinCanvas extends Pane{
     
     public void redrawAll(){
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
-        context.setFill(Color.CORAL);
-        context.fillRect(0, 0, this.realCanvas.getWidth(), this.realCanvas.getHeight());
+        GroupeTT model = this.main.getModel();
+        
     }
 
 }

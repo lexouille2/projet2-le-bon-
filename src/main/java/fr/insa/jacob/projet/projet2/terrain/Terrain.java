@@ -7,6 +7,8 @@ package fr.insa.jacob.projet.projet2.terrain;
 
 
 import java.util.ArrayList;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Paint;
 
 /**
  *
@@ -18,15 +20,16 @@ public class Terrain {
     private double xmax;
     private double ymin;
     private double ymax;
-    private ArrayList<TriangleTerrain> listTT;//ensemble de triangle terrain
+    private GroupeTT grpTT;//ensemble de triangle terrain
     
-    public Terrain(double xmin, double xmax, double ymin, double ymax, ArrayList<TriangleTerrain> listTT){
+    public Terrain(double xmin, double xmax, double ymin, double ymax, GroupeTT grpTT){
         this.xmin = xmin;
         this.xmax = xmax;
         this.ymax = ymax;
         this.ymin = ymin;
-        this.listTT = new ArrayList<TriangleTerrain>();
+        this.grpTT = grpTT;
     }
+
 
     public double getXmin() {
         return xmin;
@@ -44,9 +47,17 @@ public class Terrain {
         return ymax;
     }
 
-    public ArrayList<TriangleTerrain> getListTT() {
-        return listTT;
+    public GroupeTT getGrpTT() {
+        return grpTT;
     }
 
-    
+    public void dessine(GraphicsContext context){
+        context.setStroke(this.getCouleur());
+        context.strokeLine(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
+    }
+
+    private Paint getCouleur() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+       
 }

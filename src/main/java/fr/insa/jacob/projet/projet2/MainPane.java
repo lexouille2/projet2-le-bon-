@@ -5,6 +5,8 @@
  */
 package fr.insa.jacob.projet.projet2;
 
+import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -23,6 +25,9 @@ import javafx.scene.layout.VBox;
 //this est un MainPane c'est la fenêtre
 public class MainPane extends BorderPane{
     
+    private GroupeTT model;
+    private Controleur controleur;
+    
     private RadioButton rbSelect;
     private RadioButton rbNoeud;
     private RadioButton rbBarre;
@@ -32,7 +37,9 @@ public class MainPane extends BorderPane{
     
     private DessinCanvas cDessin;
     
-    public MainPane(){
+    public MainPane(GroupeTT model){
+        this.model = model;
+        this.controleur = new Controleur(this);
         this.rbSelect = new RadioButton("Select");
         this.rbNoeud = new RadioButton("Noeud");
         this.rbBarre = new RadioButton("Barre");
@@ -58,7 +65,21 @@ public class MainPane extends BorderPane{
         VBox vbDroit = new VBox(this.bGrouper,this.bCouleur);
         this.setRight(vbDroit);
         
-        this.cDessin = new DessinCanvas();
+        this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
+    }
+
+    /**
+     * @return the model
+     */
+    public GroupeTT getModel() {
+        return model;
+    }
+
+    /**
+     * @return the controleur
+     */
+    public Controleur getControleur() {
+        return controleur;
     }
 }
