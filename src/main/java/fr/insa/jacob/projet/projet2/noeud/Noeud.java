@@ -5,6 +5,9 @@
  */
 package fr.insa.jacob.projet.projet2.noeud;
     
+import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import fr.insa.jacob.projet.projet2.terrain.Terrain;
+
     /**
  *
  * @author PC
@@ -12,8 +15,8 @@ package fr.insa.jacob.projet.projet2.noeud;
 public class Noeud{
     
     public int idNoeud;
-    
-    public Noeud(int idNoeud){
+
+    public Noeud(int idNoeud) {
         this.idNoeud = idNoeud;
     }
 

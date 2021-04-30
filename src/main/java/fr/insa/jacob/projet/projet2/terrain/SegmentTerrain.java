@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insa.jacob.projet.projet2.treillis;
+package fr.insa.jacob.projet.projet2.terrain;
 
-import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import fr.insa.jacob.projet.projet2.noeud.Point;
 
 /**
  *
  * @author PC
  */
-public class Treillis {
+public class SegmentTerrain {
     
-    private Terrain terrain;
-    
+    private Point debut;
+    private Point fin;
+   
 }

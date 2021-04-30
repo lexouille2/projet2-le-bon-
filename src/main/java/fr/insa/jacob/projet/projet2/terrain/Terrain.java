@@ -51,10 +51,7 @@ public class Terrain {
         return grpTT;
     }
 
-    public void dessine(GraphicsContext context){
-        context.setStroke(this.getCouleur());
-        context.strokeLine(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
-    }
+
 
     private Paint getCouleur() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

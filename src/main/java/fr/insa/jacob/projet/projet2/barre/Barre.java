@@ -6,19 +6,21 @@
 package fr.insa.jacob.projet.projet2.barre;
 
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
+import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import fr.insa.jacob.projet.projet2.terrain.Terrain;
 
 /**
  *
  * @author PC
  */
-public class Barre {
+public class Barre extends Terrain{
     
     private int idBarre;
     private Noeud n1, n2;
     private TypeBarre type;
-    
-    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type){
-        
+
+    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type, double xmin, double xmax, double ymin, double ymax, GroupeTT grpTT) {
+        super(xmin, xmax, ymin, ymax, grpTT);
         this.idBarre = idBarre;
         this.n1 = n1;
         this.n2 = n2;
@@ -49,6 +51,11 @@ public class Barre {
     @Override
     public String toString() {
         return "Barre{" + "idBarre=" + idBarre + ", n1=" + n1 + ", n2=" + n2 + ", type=" + type + '}';
+    }
+    
+    public void dessine(GraphicsContext context){
+        context.setStroke(this.getCouleur());
+        context.strokeLine(this.n1.getPx(), this.n1.getPy(), this.n2.getPx(), this.n2.getPy());
     }
 }
     

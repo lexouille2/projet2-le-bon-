@@ -5,6 +5,10 @@
  */
 package fr.insa.jacob.projet.projet2.noeud;
 
+import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import javafx.scene.canvas.GraphicsContext;
+
 
 
 
@@ -15,18 +19,24 @@ package fr.insa.jacob.projet.projet2.noeud;
  */
 public class Point{
     
+    public static double RAYON_IN_DRAW = 5;
+    
     private double px;
     private double py;
-    
-    public Point (double px, double py){
+
+    public Point(double px, double py) {
         this.px = px;
         this.py = py;
     }
-    
-    public double getPx(){
-        return this.px;
+
+    public Point(){
+        this(0,0);
     }
     
+    public double getPx() {
+        return px;
+    }
+
     public double getPy(){
         return this.py;
     }
@@ -48,5 +58,10 @@ public class Point{
         double dx = this.px - p2.px;
         double dy = this.py - p2.py;
         return Math.sqrt(dx * dx + dy * dy);
+    }
+    
+    public void dessine(GraphicsContext context){
+        //context.setFill(this.getCouleur());
+        context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     }
 }
