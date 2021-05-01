@@ -12,16 +12,26 @@ import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
  * @author PC
  */
 public class NoeudSimple extends Noeud{
-    
-    private Point noeudS;
 
-    public NoeudSimple(Point noeudS, int idNoeud) {
+    public NoeudSimple(int idNoeud) {
         super(idNoeud);
-        this.noeudS = noeudS;
     }
 
-    public Point getNoeudS() {
-        return noeudS;
+    /*    public Point getNoeudS() {
+    return noeudS;
+    }*/
+
+    @Override
+    public double getAbsNoeud() {
+        return this.ne.getPx();
+    }
+
+    @Override
+    public double getOrdNoeud() {
+        return this.ne.getPy();
     }
     
+    public static void test(){
+        
+    }
 }

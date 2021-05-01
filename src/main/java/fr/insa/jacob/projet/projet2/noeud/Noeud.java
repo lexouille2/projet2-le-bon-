@@ -12,17 +12,18 @@ import fr.insa.jacob.projet.projet2.terrain.Terrain;
  *
  * @author PC
  */
-public class Noeud{
+public abstract class Noeud{
     
-    public int idNoeud;
+    private int idNoeud;
+    Point ne;
 
     public Noeud(int idNoeud) {
         this.idNoeud = idNoeud;
     }
-
-    public double distance(Noeud n2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    public abstract double getAbsNoeud();
+    
+    public abstract double getOrdNoeud();
 
 }
 

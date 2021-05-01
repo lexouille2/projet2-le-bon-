@@ -63,11 +63,19 @@ public class NoeudAppui extends Noeud {
         return this.finSeg;
     } 
     
-    //public Point calcPos(double alpha, Point debutSeg, Point finSeg){
-        //this.pos.getPx() = (1 - alpha) * this.finSeg.getPx() + this.debutSeg.getPx() * alpha;
-        //pos.getPx() = ((1 - alpha) * finSeg.getPx()) + (alpha * debutSeg.getPx()));
-        //return pos;
-    //}
+    public Point calcPos(double alpha){
+        double absPos = this.pos.getPx();
+        double ordPos = this.pos.getPy();
+        double absDebut = this.debutSeg.getPx();
+        double ordDebut = this.debutSeg.getPy();
+        double absFin = this.finSeg.getPx();
+        double ordFin = this.finSeg.getPy();
+        absPos = (1 - alpha) * absFin + absDebut * alpha;
+        ordPos = (1 - alpha) * ordFin + alpha * ordDebut;
+        Point point = new Point(absPos, ordPos);
+        this.pos = point;
+        return this.pos;
+    }
     
     public static void test(){
         Point p1, p2, p3;
@@ -82,14 +90,24 @@ public class NoeudAppui extends Noeud {
         n1.calcFinSeg();
         System.out.println(n1.debutSeg);
         System.out.println(n1.finSeg);
-        //n1.pos.getPx() = (1 - alpha) * n1.finSeg.getPx() + n1.debutSeg.getPx() * alpha;
-        //pos.getPy() = ((1 - alpha) * finSeg.getPy()) + (alpha * debutSeg.getPy()));
+        n1.calcPos(alpha);
+        System.out.println(n1.pos);
     }
 
     
     
     public static void main(String[] args) {
         test();
+    }
+
+    @Override
+    public double getAbsNoeud() {
+        return this.pos.getPx();
+    }
+
+    @Override
+    public double getOrdNoeud() {
+        return this.pos.getPy();
     }
     
 }

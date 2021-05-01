@@ -6,21 +6,25 @@
 package fr.insa.jacob.projet.projet2.barre;
 
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
+import fr.insa.jacob.projet.projet2.noeud.NoeudAppui;
+import fr.insa.jacob.projet.projet2.noeud.NoeudSimple;
+import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
  * @author PC
  */
-public class Barre extends Terrain{
+public class Barre{
     
     private int idBarre;
-    private Noeud n1, n2;
+    private Noeud n1, n2; 
     private TypeBarre type;
 
-    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type, double xmin, double xmax, double ymin, double ymax, GroupeTT grpTT) {
-        super(xmin, xmax, ymin, ymax, grpTT);
+    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type) {
         this.idBarre = idBarre;
         this.n1 = n1;
         this.n2 = n2;
@@ -43,9 +47,15 @@ public class Barre extends Terrain{
         return type;
     }
     
+    public double distance() {
+        double dx = this.n1.getAbsNoeud() - this.n2.getAbsNoeud();
+        double dy = this.n1.getOrdNoeud() - this.n2.getOrdNoeud();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+        
     public double longueur() {
         Barre barre;
-        return this.n1.distance(this.n2);
+        return this.distance();
     }
 
     @Override
@@ -53,9 +63,21 @@ public class Barre extends Terrain{
         return "Barre{" + "idBarre=" + idBarre + ", n1=" + n1 + ", n2=" + n2 + ", type=" + type + '}';
     }
     
-    public void dessine(GraphicsContext context){
-        context.setStroke(this.getCouleur());
-        context.strokeLine(this.n1.getPx(), this.n1.getPy(), this.n2.getPx(), this.n2.getPy());
+    /*public void dessine(GraphicsContext context){
+    //context.setStroke(this.getCouleur());
+    context.strokeLine(this.n1.getPx(), this.n1.getPy(), this.n2.getPx(), this.n2.getPy());
+    }*/
+    
+    public static void test(){
+        Noeud n1, n2;
+        n1 = new Noeud(3,1,0);
+        n2 = new Noeud()
+    }
+
+    
+    
+    public static void main(String[] args) {
+        test();
     }
 }
     
