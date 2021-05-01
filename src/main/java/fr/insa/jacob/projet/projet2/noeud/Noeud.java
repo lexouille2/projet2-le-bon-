@@ -12,18 +12,27 @@ import fr.insa.jacob.projet.projet2.terrain.Terrain;
  *
  * @author PC
  */
-public abstract class Noeud{
+public class Noeud{ //abstract
     
     private int idNoeud;
-    Point ne;
+    protected Point ne;
 
-    public Noeud(int idNoeud) {
+    public Noeud(int idNoeud, Point ne) {
         this.idNoeud = idNoeud;
+        this.ne = ne;
     }
     
-    public abstract double getAbsNoeud();
+    //public abstract double getAbsNoeud();
     
-    public abstract double getOrdNoeud();
+    //public abstract double getOrdNoeud();
+    
+    public double getAbsNoeud(){
+        return this.ne.getPx();
+    }
+    
+    public double getOrdNoeud(){
+        return this.ne.getPy();
+    }
 
 }
 

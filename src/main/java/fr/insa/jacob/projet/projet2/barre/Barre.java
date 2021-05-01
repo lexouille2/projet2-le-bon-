@@ -69,12 +69,26 @@ public class Barre{
     }*/
     
     public static void test(){
-        Noeud n1, n2;
-        n1 = new Noeud(3,1,0);
-        n2 = new Noeud()
-    }
+        Point p1, p2, p3;
+        p1 = new Point(1, 0);
+        p2 = new Point(0, 1);
+        p3 = new Point(1,1);
+        TriangleTerrain TTT = new TriangleTerrain(9, p1, p2, p3);
+        
+        /* Noeud neuu;     // --> test pour savoir si on peut passer de noeud a noeud simple ou appui
+        neuu = new NoeudSimple(3, p1);  // !!! on peut créer un noeud et ENSUITE dire si c'est un noeud simple ou appui
+        neuu = new NoeudAppui(6, p2, TTT, 1);*/
+        
+        Noeud n1, n2;    
+        n1 = new Noeud(3, p1);  
+        n2 = new Noeud(4, p2);
 
-    
+        TypeBarre tip = new TypeBarre(1,1,1,1,1,1);
+        Barre bar = new Barre(5, n1, n2, tip);
+        
+        //bar.longueur(); // pour la longueur de la barre on s'en fou de savoir quels types de noeuds on a, il nous faut juste 2 noeuds quelconques.
+        System.out.println(bar.longueur());
+    }
     
     public static void main(String[] args) {
         test();
