@@ -75,7 +75,7 @@ public class Barre{
         p3 = new Point(1,1);
         TriangleTerrain TTT = new TriangleTerrain(9, p1, p2, p3);
         
-        /* Noeud neuu;     // --> test pour savoir si on peut passer de noeud a noeud simple ou appui
+        /*Noeud neuu;     // --> test pour savoir si on peut passer de noeud a noeud simple ou appui
         neuu = new NoeudSimple(3, p1);  // !!! on peut créer un noeud et ENSUITE dire si c'est un noeud simple ou appui
         neuu = new NoeudAppui(6, p2, TTT, 1);*/
         
