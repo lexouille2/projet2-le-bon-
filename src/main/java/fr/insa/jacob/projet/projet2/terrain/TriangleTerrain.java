@@ -6,6 +6,7 @@
 package fr.insa.jacob.projet.projet2.terrain;
 
 import fr.insa.jacob.projet.projet2.noeud.Point;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
@@ -17,6 +18,7 @@ public class TriangleTerrain{
     private Point p1;
     private Point p2;
     private Point p3;
+    private GroupeTT grpTT;
 
     public TriangleTerrain(int idTT, Point p1, Point p2, Point p3) {
         this.idTT = idTT;
@@ -39,6 +41,22 @@ public class TriangleTerrain{
     
     public int getIdTT(){
         return this.idTT;
+    }
+
+    public GroupeTT getGroupeTT(){
+        return grpTT;
+    }
+
+    public void setGroupeTT(GroupeTT grpTT) {
+        this.grpTT = grpTT;
+    }
+    
+    
+    public void dessine(GraphicsContext context){
+        //context.setStroke(this.getCouleur());
+        context.strokeLine(this.p1.getPx(), this.p1.getPy(), this.p2.getPx(), this.p2.getPy());
+        context.strokeLine(this.p2.getPx(), this.p2.getPy(), this.p3.getPx(), this.p3.getPy());
+        context.strokeLine(this.p3.getPx(), this.p3.getPy(), this.p1.getPx(), this.p1.getPy());
     }
     
     

@@ -12,13 +12,14 @@ import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
+import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
  * @author PC
  */
-public class Barre{
+public class Barre extends FigureSimple{
     
     private int idBarre;
     private Noeud n1, n2; 
@@ -86,8 +87,13 @@ public class Barre{
         TypeBarre tip = new TypeBarre(1,1,1,1,1,1);
         Barre bar = new Barre(5, n1, n2, tip);
         
-        //bar.longueur(); // pour la longueur de la barre on s'en fou de savoir quels types de noeuds on a, il nous faut juste 2 noeuds quelconques.
+        //bar.longueur(); // pour la longueur de la barre on s'en fout de savoir quels types de noeuds on a, il nous faut juste 2 noeuds quelconques.
         System.out.println(bar.longueur());
+    }
+    
+    public void dessine(GraphicsContext context){
+        //context.setStroke(this.getCouleur());
+        context.strokeLine(this.n1.getAbsNoeud(), this.n1.getOrdNoeud(), this.n2.getAbsNoeud(), this.n2.getOrdNoeud());
     }
     
     public static void main(String[] args) {

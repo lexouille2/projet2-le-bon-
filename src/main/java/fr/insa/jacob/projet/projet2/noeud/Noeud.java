@@ -7,12 +7,13 @@ package fr.insa.jacob.projet.projet2.noeud;
     
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
 
     /**
  *
  * @author PC
  */
-public class Noeud{ //abstract
+public class Noeud extends FigureSimple{ 
     
     private int idNoeud;
     protected Point ne;
@@ -21,10 +22,6 @@ public class Noeud{ //abstract
         this.idNoeud = idNoeud;
         this.ne = ne;
     }
-    
-    //public abstract double getAbsNoeud();
-    
-    //public abstract double getOrdNoeud();
     
     public double getAbsNoeud(){
         return this.ne.getPx();

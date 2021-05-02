@@ -16,6 +16,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -27,6 +28,7 @@ public class MainPane extends BorderPane{
     
     private GroupeTT model;
     private Controleur controleur;
+    /*    private Stage inStage;*/
     
     private RadioButton rbSelect;
     private RadioButton rbNoeud;
@@ -44,7 +46,7 @@ public class MainPane extends BorderPane{
         this.rbNoeud = new RadioButton("Noeud");
         this.rbBarre = new RadioButton("Barre");
         
-        VBox vbGauche = new VBox(this.rbSelect,this.rbNoeud,this.rbBarre);
+        VBox vbGauche = new VBox(this.getRbSelect(), this.getRbNoeud(), this.getRbBarre());
         this.setLeft(vbGauche);
         
         this.bGrouper = new Button ("Grouper");
@@ -62,7 +64,7 @@ public class MainPane extends BorderPane{
                 System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
             }
         });
-        VBox vbDroit = new VBox(this.bGrouper,this.bCouleur);
+        VBox vbDroit = new VBox(this.getbGrouper(), this.getbCouleur());
         this.setRight(vbDroit);
         
         this.cDessin = new DessinCanvas(this);
@@ -81,5 +83,55 @@ public class MainPane extends BorderPane{
      */
     public Controleur getControleur() {
         return controleur;
+    }
+    
+    /*    public MainPane(Stage inStage){
+    this(inStage, new GroupeTT());
+    }*/
+    
+    /*    public MainPane(Stage inStage, GroupeTT model){
+    this(inStage, null, model);
+    }*/
+
+    /**
+     * @return the rbSelect
+     */
+    public RadioButton getRbSelect() {
+        return rbSelect;
+    }
+
+    /**
+     * @return the rbNoeud
+     */
+    public RadioButton getRbNoeud() {
+        return rbNoeud;
+    }
+
+    /**
+     * @return the rbBarre
+     */
+    public RadioButton getRbBarre() {
+        return rbBarre;
+    }
+
+    /**
+     * @return the bGrouper
+     */
+    public Button getbGrouper() {
+        return bGrouper;
+    }
+
+    /**
+     * @return the bCouleur
+     */
+    public Button getbCouleur() {
+        return bCouleur;
+    }
+
+    /**
+     * @return the cDessin
+     */
+    public DessinCanvas getcDessin() {
+        return cDessin;
     }
 }
