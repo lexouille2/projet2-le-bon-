@@ -7,6 +7,7 @@ package fr.insa.jacob.projet.projet2;
 
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
+import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
 //this est un MainPane c'est la fenêtre
 public class MainPane extends BorderPane{
     
+    private Groupe modelFS;
     private GroupeTT model;
     private Controleur controleur;
     /*    private Stage inStage;*/
@@ -39,8 +41,9 @@ public class MainPane extends BorderPane{
     
     private DessinCanvas cDessin;
     
-    public MainPane(GroupeTT model){
-        this.model = model;
+    public MainPane(GroupeTT model, Groupe modelFS){
+        /*this.model = model;*/
+        this.modelFS = modelFS;
         this.controleur = new Controleur(this);
         this.rbSelect = new RadioButton("Select");
         this.rbNoeud = new RadioButton("Noeud");
@@ -76,6 +79,10 @@ public class MainPane extends BorderPane{
      */
     public GroupeTT getModel() {
         return model;
+    }
+
+    public Groupe getModelFS() {
+        return modelFS;
     }
 
     /**

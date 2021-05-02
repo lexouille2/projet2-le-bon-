@@ -37,6 +37,6 @@ public class Controleur {
         double py = t.getY();
         Color col = Color.color(Math.random(), Math.random(), Math.random());
         GroupeTT model = this.vue.getModel();
-        model.add(new Point(px, py));
+        /*        model.add(new Point(px, py));*/
     }
 }

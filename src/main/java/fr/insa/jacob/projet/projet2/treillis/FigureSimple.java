@@ -5,10 +5,24 @@
  */
 package fr.insa.jacob.projet.projet2.treillis;
 
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  *
  * @author PC
  */
-public class FigureSimple {
+public abstract class FigureSimple {
+
+    private Groupe grpFS;
+    
+    public Groupe getGrpFS() {
+        return grpFS;
+    }
+
+    public void setGrpFS(Groupe grpFS) {
+        this.grpFS = grpFS;
+    }
+
+    public abstract void dessine(GraphicsContext context);  
     
 }
