@@ -27,8 +27,7 @@ import javafx.stage.Stage;
 //this est un MainPane c'est la fenêtre
 public class MainPane extends BorderPane{
     
-    private Groupe modelFS;
-    private GroupeTT model;
+    private Groupe model;
     private Controleur controleur;
     /*    private Stage inStage;*/
     
@@ -41,9 +40,8 @@ public class MainPane extends BorderPane{
     
     private DessinCanvas cDessin;
     
-    public MainPane(GroupeTT model, Groupe modelFS){
-        /*this.model = model;*/
-        this.modelFS = modelFS;
+    public MainPane(Groupe model){
+        this.model = model;
         this.controleur = new Controleur(this);
         this.rbSelect = new RadioButton("Select");
         this.rbNoeud = new RadioButton("Noeud");
@@ -72,17 +70,18 @@ public class MainPane extends BorderPane{
         
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
+        this.controleur.changeEtat(30);
+    }
+    
+    public void redrawAll(){
+        this.cDessin.redrawAll();
     }
 
     /**
      * @return the model
      */
-    public GroupeTT getModel() {
+    public Groupe getModel() {
         return model;
-    }
-
-    public Groupe getModelFS() {
-        return modelFS;
     }
 
     /**

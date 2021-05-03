@@ -6,6 +6,7 @@
 package fr.insa.jacob.projet.projet2;
 
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import javafx.scene.layout.Pane;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -43,7 +44,7 @@ public class DessinCanvas extends Pane{
     
     public void redrawAll(){
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
-        GroupeTT model = this.main.getModel();
+        Groupe model = this.main.getModel();
         model.dessine(context);
     }
 

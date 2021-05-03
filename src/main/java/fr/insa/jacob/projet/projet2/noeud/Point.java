@@ -7,6 +7,7 @@ package fr.insa.jacob.projet.projet2.noeud;
 
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
 import javafx.scene.canvas.GraphicsContext;
 
 
@@ -17,7 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
  *
  * @author PC
  */
-public class Point{
+public class Point extends FigureSimple{
     
     public static double RAYON_IN_DRAW = 5;
     
