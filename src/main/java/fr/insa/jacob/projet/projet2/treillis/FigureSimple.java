@@ -16,26 +16,7 @@ import javafx.scene.paint.Color;
 public abstract class FigureSimple extends Treillis{
 
     private Color couleur;
-    
-    private Groupe grpFS;
-    
-    public static Color COULEUR_SELECTION = Color.RED;
-     
-    public Groupe getGrpFS() {
-        return grpFS;
-    }
-
-    public void setGrpFS(Groupe grpFS) {
-        this.grpFS = grpFS;
-    }
-
-    public abstract void dessine(GraphicsContext context);  
-    
-    public abstract double distance(Point p);
-    
-    public abstract void dessineSelection(GraphicsContext context);
-    
-    
+       
     public FigureSimple(Color couleur) {
         this.couleur = couleur;
     }

@@ -20,8 +20,7 @@ public class GroupeTT extends Groupe{
     
     private List<TriangleTerrain> groupeTT;
 
-    public GroupeTT(Color couleur) {
-        super(couleur);
+    public GroupeTT() {
         this.groupeTT = new ArrayList<TriangleTerrain>();
     }
     

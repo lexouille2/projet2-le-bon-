@@ -18,42 +18,44 @@ import javafx.scene.paint.Color;
  *
  * @author PC
  */
-public class Groupe extends FigureSimple{
+public class Groupe extends Treillis{
     
+    private List<Treillis> grpT;
     
-    private List<FigureSimple> grpFS;
+    public List<Treillis> getGrpT() {
+        return grpT;
+    }
     
-    public Groupe(Color couleur){
-        super(couleur);
-        this.grpFS = new ArrayList<FigureSimple>();
+    public Groupe(){
+        this.grpT = new ArrayList<Treillis>();
     }
     
     
-    public void add(FigureSimple fS){
-        if (fS.getGrpFS() != this){
-            if (fS.getGrpFS() != null){
+    public void add(Treillis t){
+        if (t.getGrpFS() != this){
+            if (t.getGrpFS() != null){
                 throw new Error ("Figure deja dans un autre groupe");
             }
-            this.grpFS.add(fS);
-            fS.setGrpFS(this);
+            this.grpT.add(t);
+            t.setGrpFS(this);
         }
     }
     
     public void dessine(GraphicsContext context){
-        for (FigureSimple fS : this.grpFS){
-            fS.dessine(context);
+        for (Treillis t : this.grpT){
+            t.dessine(context);
         }
     }
     
-    public FigureSimple plusProche(Noeud n, double distMax) {
-        if (this.grpFS.isEmpty()) {//groupe vide ou objets trop loin
+    public Treillis plusProche(Point p, double distMax) {
+        if (this.grpT.isEmpty()) {//groupe vide ou objets trop loin
             return null;
         } else {
-            FigureSimple fmin = this.grpFS.get(0);
-            Point p = new Point(n.getAbsNoeud(),n.getOrdNoeud());
+            Treillis fmin = this.grpT.get(0);
+            //Point p = new Point(n.getAbsNoeud(),n.getOrdNoeud());
             double min = fmin.distance(p);
-            for (int i = 1; i < this.grpFS.size(); i++) {
-                FigureSimple fcur = this.grpFS.get(i);
+            for (int i = 1; i < this.grpT.size(); i++) {
+                Treillis fcur = this.grpT.get(i);
                 double cur = fcur.distance(p);
                 if (cur < min) {
                     min = cur;
@@ -68,7 +70,7 @@ public class Groupe extends FigureSimple{
         }
     }
         
-    /*    public static Groupe groupeTest(){
+    public static Groupe groupeTest(){
     Point p1 = new Point (10,10);
     Point p2 = new Point (100,10);
     Point p3 = new Point (10,100);
@@ -83,7 +85,7 @@ public class Groupe extends FigureSimple{
     grpfS.add(b2);
     grpfS.add(n6);
     return grpfS;
-    }*/
+    }
     
     /*    public static void main(String[] args) {
     System.out.println(groupeTest());
@@ -91,12 +93,12 @@ public class Groupe extends FigureSimple{
 
     @Override
     public double distance(Point p) {
-        if (this.grpFS.isEmpty()) {
+        if (this.grpT.isEmpty()) {
             return new Point(0, 0).distance(p);
         } else {
-            double dist = this.grpFS.get(0).distance(p);
-            for (int i = 1; i < this.grpFS.size(); i++) {
-                double cur = this.grpFS.get(i).distance(p);
+            double dist = this.grpT.get(0).distance(p);
+            for (int i = 1; i < this.grpT.size(); i++) {
+                double cur = this.grpT.get(i).distance(p);
                 if (cur < dist) {
                     dist = cur;
                 }
@@ -107,8 +109,8 @@ public class Groupe extends FigureSimple{
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        for (FigureSimple f : this.grpFS) {
-            f.dessineSelection(context);
+        for (Treillis t : this.grpT) {
+            t.dessineSelection(context);
         }
     }
 

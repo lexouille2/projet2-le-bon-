@@ -6,7 +6,6 @@
 package fr.insa.jacob.projet.projet2;
 
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
-import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import java.util.List;
@@ -49,10 +48,10 @@ public class DessinCanvas extends Pane{
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
         Groupe model = this.main.getModel();
         model.dessine(context);
-        List<FigureSimple> select = this.main.getControleur().getSelection();
+        List<Treillis> select = this.main.getControleur().getSelection();
         if(! select.isEmpty()){
-            for (FigureSimple f : select){
-                f.dessineSelection(context);
+            for (Treillis t : select){
+                t.dessineSelection(context);
             }
         }
     }

@@ -28,6 +28,7 @@ import javafx.stage.Stage;
  */
 
 //this est un MainPane c'est la fenêtre
+
 public class MainPane extends BorderPane{
     
     private Groupe model;
@@ -43,10 +44,6 @@ public class MainPane extends BorderPane{
     
     private DessinCanvas cDessin;
     private ColorPicker cpCouleur;
-    
-    public MainPane(){
-        this(new Groupe(Color.BLACK));
-    }
     
     public MainPane(Groupe model){
         this.model = model;
@@ -76,14 +73,21 @@ public class MainPane extends BorderPane{
         
         this.bGrouper = new Button ("Grouper");
         this.bGrouper.setOnAction(new EventHandler<ActionEvent>(){
-            public void handle(ActionEvent t){
-                System.out.println("bouton Grouper cliqué");
-            }
+        public void handle(ActionEvent t){
+        System.out.println("bouton Grouper cliqué");
+        }
         });
+        
+        /* this.bGrouper = new Button("Grouper");
+        this.bGrouper.setOnAction((t) -> {
+        this.controleur.boutonGrouper(t);
+        });*/
+        
         this.bCouleur = new Button("Couleur");
         this.bCouleur.setOnAction((t)->{
         System.out.println("Bouton couleur ");
-    });
+        });
+        
         this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent t){
                 System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());

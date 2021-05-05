@@ -10,7 +10,6 @@ import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
-import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import java.util.ArrayList;
@@ -31,9 +30,9 @@ public class Controleur {
     
     private double[] pos1 = new double[2];//on retient px et py du premier clic
     
-    private Point pointPos1;
+   // private Point pointPos1;
     
-    private List<FigureSimple> selection;
+    private List<Treillis> selection;
     
     public Controleur(MainPane vue){
         this.vue = vue;
@@ -41,23 +40,23 @@ public class Controleur {
     }
     
     public void changeEtat(int nouvelEtat) {
-        if (nouvelEtat == 20) {
+        if (nouvelEtat == 20) { // bouton select
             this.vue.getRbSelect().setSelected(true);
             this.selection.clear();
             this.vue.redrawAll();
-        } else if (nouvelEtat == 30) {
+        } else if (nouvelEtat == 30) { // bouton noeud
             // creation de points
             this.vue.getRbNoeud().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 40) {
+        } else if (nouvelEtat == 40) { // bouton barre
             // creation de segments étape 1
             this.vue.getRbBarre().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 41) {
+        } else if (nouvelEtat == 41) { // 2e point du segment
             // creation de segments étape 2
         }
         this.etat = nouvelEtat;
@@ -65,10 +64,10 @@ public class Controleur {
 
     void clicDansZoneDessin(MouseEvent t) {
         if(this.etat == 20){ //on dessine juste un point
-            Noeud pclic = new Noeud(0,new Point(t.getX(),t.getY()));
+            Point pclic = new Point(t.getX(),t.getY());
             //Color col = Color.color(Math.random(), Math.random(), Math.random());
             //pas de limite de distance entre le clic et l'objet sélectionné
-            FigureSimple proche = this.vue.getModel().plusProche(pclic,Double.MAX_VALUE);
+            Treillis proche = this.vue.getModel().plusProche(pclic,Double.MAX_VALUE);
             //il faut prévoir le cas où le groupe est vide, donc pas de plus proche
             if (proche != null) {
                 if (t.isShiftDown()) {
@@ -89,9 +88,10 @@ public class Controleur {
         } else if (this.etat == 30){ //pos1 retient la position du premier clic
             double px = t.getX();
             double py = t.getY();
-            Color col = this.vue.getCpCouleur().getValue();
+           // Color col = this.vue.getCpCouleur().getValue();
+            Color col = Color.BLACK;
             Groupe model = this.vue.getModel();
-            model.add(new Point(px, py));
+            model.add(new Point(px, py, col));
             this.vue.redrawAll();
         } else if (this.etat == 40) {
             this.pos1[0] = t.getX();
@@ -103,8 +103,7 @@ public class Controleur {
             Point pointPos2 = new Point (px2,py2);
             Color col = this.vue.getCpCouleur().getValue();
             TypeBarre tip = new TypeBarre (1,2,3,4,5,6);
-            this.vue.getModel().add(
-            new Barre(1, new Noeud(1,pointPos1),new Noeud(2,pointPos2),tip));
+            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2)),tip));
             this.vue.redrawAll(); //on redessine le model qui a été modifié
             this.changeEtat(40);
         }
@@ -131,7 +130,7 @@ public class Controleur {
         }
     }
     
-    public List<FigureSimple> getSelection() {
+    public List<Treillis> getSelection() {
         return selection;
     }
 }

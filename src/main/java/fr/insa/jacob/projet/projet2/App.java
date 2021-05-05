@@ -20,7 +20,7 @@ public class App extends Application {
         var javafxVersion = SystemInfo.javafxVersion();
 
         //var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new MainPane(),800,600);
+        var scene = new Scene(new MainPane(Groupe.groupeTest()),800,600);
         stage.setScene(scene);
         stage.show();
     }
