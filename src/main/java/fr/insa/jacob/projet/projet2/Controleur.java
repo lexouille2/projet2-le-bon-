@@ -133,4 +133,24 @@ public class Controleur {
     public List<Treillis> getSelection() {
         return selection;
     }
+    
+    void boutonGrouper(ActionEvent t) {
+        if (this.etat == 20 && this.selection.size() > 1) {
+            // normalement le bouton est disabled dans le cas contraire
+            Groupe ssGroupe = this.vue.getModel().sousGroupe(selection);
+            this.selection.clear();
+            this.selection.add(ssGroupe);
+            this.vue.redrawAll();
+        }
+    }
+
+    void changeColor(Color value) {
+        if (this.etat == 20 && this.selection.size() > 0) {
+            for (Treillis t : this.selection) {
+                t.changeCouleur(value);
+            }
+            this.vue.redrawAll();
+        }
+    }
+
 }

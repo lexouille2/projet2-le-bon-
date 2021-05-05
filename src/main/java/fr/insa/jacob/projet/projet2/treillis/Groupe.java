@@ -32,12 +32,12 @@ public class Groupe extends Treillis{
     
     
     public void add(Treillis t){
-        if (t.getGrpFS() != this){
-            if (t.getGrpFS() != null){
+        if (t.getGrp() != this){
+            if (t.getGrp() != null){
                 throw new Error ("Figure deja dans un autre groupe");
             }
             this.grpT.add(t);
-            t.setGrpFS(this);
+            t.setGrp(this);
         }
     }
     
@@ -113,5 +113,30 @@ public class Groupe extends Treillis{
             t.dessineSelection(context);
         }
     }
+    
 
+    public void changeCouleur(Color value) {
+        for (Treillis t : this.grpT) {
+            t.changeCouleur(value);
+        }
+    }
+
+    public Groupe sousGroupe(List<Treillis> lt) {
+        // verifie que les figures font actuellement partie du groupe
+        // et les enleve du groupe
+        for (int i = 0; i < lt.size(); i++) {
+            Treillis t = lt.get(i);
+            if (t.getGrp() != this) {
+                throw new Error(t + " n'appartient pas au groupe " + this);
+            }
+            this.grpT.remove(t);
+            t.setGrp(null);
+        }
+        Groupe sg = new Groupe();
+        for (int i = 0; i < lt.size(); i++) {
+            sg.add(lt.get(i));
+        }
+        this.add(sg);
+        return sg;
+    }
 }

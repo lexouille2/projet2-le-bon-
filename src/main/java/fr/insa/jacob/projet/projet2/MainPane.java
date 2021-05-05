@@ -40,12 +40,16 @@ public class MainPane extends BorderPane{
     private RadioButton rbBarre;
     
     private Button bGrouper;
-    private Button bCouleur;
-    
-    private DessinCanvas cDessin;
     private ColorPicker cpCouleur;
     
+    private DessinCanvas cDessin;
+    
+    public MainPane(){
+        this(new Groupe());
+    }
+    
     public MainPane(Groupe model){
+        
         this.model = model;
         this.controleur = new Controleur(this);
         
@@ -68,32 +72,27 @@ public class MainPane extends BorderPane{
         this.rbBarre.setToggleGroup(bgEtat);
         this.rbNoeud.setSelected(true);
         
-        VBox vbGauche = new VBox(this.getRbSelect(), this.getRbNoeud(), this.getRbBarre());
+        VBox vbGauche = new VBox(this.rbSelect, this.rbNoeud, this.rbBarre);
         this.setLeft(vbGauche);
         
         this.bGrouper = new Button ("Grouper");
-        this.bGrouper.setOnAction(new EventHandler<ActionEvent>(){
-        public void handle(ActionEvent t){
-        System.out.println("bouton Grouper cliqué");
+        this.bGrouper.setOnAction((t)->{
+            this.controleur.boutonGrouper(t);
+            System.out.println("bouton Grouper cliqué");
+        });
+        
+        this.cpCouleur = new ColorPicker(Color.BLACK);
+        this.cpCouleur.setOnAction((t)->{
+            System.out.println("Bouton couleur ");
+            this.controleur.changeColor(this.cpCouleur.getValue());
+        });
+        
+        /*        this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>(){
+        public void handle(MouseEvent t){
+        System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
         }
-        });
-        
-        /* this.bGrouper = new Button("Grouper");
-        this.bGrouper.setOnAction((t) -> {
-        this.controleur.boutonGrouper(t);
         });*/
-        
-        this.bCouleur = new Button("Couleur");
-        this.bCouleur.setOnAction((t)->{
-        System.out.println("Bouton couleur ");
-        });
-        
-        this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent t){
-                System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
-            }
-        });
-        VBox vbDroit = new VBox(this.getbGrouper(), this.getbCouleur());
+        VBox vbDroit = new VBox(this.bGrouper, this.cpCouleur);
         this.setRight(vbDroit);
         
         this.cDessin = new DessinCanvas(this);
@@ -153,13 +152,6 @@ public class MainPane extends BorderPane{
      */
     public Button getbGrouper() {
         return bGrouper;
-    }
-
-    /**
-     * @return the bCouleur
-     */
-    public Button getbCouleur() {
-        return bCouleur;
     }
 
     /**

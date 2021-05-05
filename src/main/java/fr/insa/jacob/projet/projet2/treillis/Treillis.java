@@ -20,14 +20,14 @@ public abstract class Treillis {
 
     public static Color COULEUR_SELECTION = Color.RED;
     
-    private Groupe grpFS;
+    private Groupe grp;
     
-    public Groupe getGrpFS() {
-        return grpFS;
+    public Groupe getGrp() {
+        return grp;
     }
 
-    void setGrpFS(Groupe grpFS) {
-        this.grpFS = grpFS;
+    void setGrp(Groupe grp) {
+        this.grp = grp;
     }
     
     public abstract void dessine(GraphicsContext context);  
@@ -36,4 +36,5 @@ public abstract class Treillis {
     
     public abstract void dessineSelection(GraphicsContext context);
     
+    public abstract void changeCouleur(Color value);
 }
