@@ -8,7 +8,9 @@ package fr.insa.jacob.projet.projet2.noeud;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
+import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 
 
@@ -25,13 +27,18 @@ public class Point extends FigureSimple{
     private double px;
     private double py;
 
-    public Point(double px, double py) {
+    public Point(double px, double py, Color couleur) {
+        super(couleur);
         this.px = px;
         this.py = py;
     }
 
-    public Point(){
-        this(0,0);
+    public Point(double px, double py) {
+        this(px, py, Color.BLACK);
+    }
+
+    public Point() {
+        this(0, 0);
     }
     
     public double getPx() {
@@ -62,7 +69,15 @@ public class Point extends FigureSimple{
     }
     
     public void dessine(GraphicsContext context){
-        //context.setFill(this.getCouleur());
+        context.setFill(this.getCouleur());
         context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     }
+
+    @Override
+    public void dessineSelection(GraphicsContext context) {
+       context.setFill(FigureSimple.COULEUR_SELECTION);
+       context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
+    }
+
+
 }

@@ -5,16 +5,22 @@
  */
 package fr.insa.jacob.projet.projet2.treillis;
 
+import fr.insa.jacob.projet.projet2.noeud.Point;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author PC
  */
-public abstract class FigureSimple {
+public abstract class FigureSimple extends Treillis{
 
+    private Color couleur;
+    
     private Groupe grpFS;
     
+    public static Color COULEUR_SELECTION = Color.RED;
+     
     public Groupe getGrpFS() {
         return grpFS;
     }
@@ -25,4 +31,24 @@ public abstract class FigureSimple {
 
     public abstract void dessine(GraphicsContext context);  
     
+    public abstract double distance(Point p);
+    
+    public abstract void dessineSelection(GraphicsContext context);
+    
+    
+    public FigureSimple(Color couleur) {
+        this.couleur = couleur;
+    }
+
+    public Color getCouleur() {
+        return couleur;
+    }
+    
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
+    }
+
+    public void changeCouleur(Color value) {
+        this.setCouleur(value);
+    }
 }

@@ -6,6 +6,7 @@
 package fr.insa.jacob.projet.projet2.noeud;
 
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -20,12 +21,13 @@ public class NoeudAppui extends Noeud {
     //private Point pos;        // ne = pos, si on change on remplace tous les "ne" par "pos"
     //private double alpha;
 
-    public NoeudAppui(int idNoeud, Point ne, TriangleTerrain TT, int num) {
-        super(idNoeud, ne);
-        this.TT = TT;
+    public NoeudAppui(int num, Point debutSeg, Point finSeg, int idNoeud, Point ne, Color couleur) {
+        super(idNoeud, ne, couleur);
         this.num = num;
-        //this.pos = pos;
+        this.debutSeg = debutSeg;
+        this.finSeg = finSeg;
     }
+
     
     /*@Override
     public double getAbsNoeud() {
@@ -82,32 +84,31 @@ public class NoeudAppui extends Noeud {
         double ordFin = this.finSeg.getPy();
         absPos = (1 - alpha) * absFin + absDebut * alpha;
         ordPos = (1 - alpha) * ordFin + alpha * ordDebut;
-        Point point = new Point(absPos, ordPos);
+        Point point = new Point(absPos, ordPos, this.getCouleur());
         this.ne = point;
         return this.ne;
     }
     
-    public static void test(){
-        Point p1, p2, p3;
-        p1 = new Point (0,0);
-        p2 = new Point (0,1);
-        p3 = new Point (1,0);
-        TriangleTerrain TT = new TriangleTerrain (1, p1, p2, p3);
-        Point pos = new Point ();
-        NoeudAppui n1 = new NoeudAppui(2, pos, TT, 1);
-        double alpha = 0.2;
-        n1.calcDebutSeg();
-        n1.calcFinSeg();
-        System.out.println(n1.debutSeg);
-        System.out.println(n1.finSeg);
-        n1.calcPos(alpha);
-        System.out.println(n1.ne);
+    /*    public static void test(){
+    Point p1, p2, p3;
+    p1 = new Point (0,0);
+    p2 = new Point (0,1);
+    p3 = new Point (1,0);
+    TriangleTerrain TT = new TriangleTerrain (1, p1, p2, p3);
+    Point pos = new Point ();
+    NoeudAppui n1 = new NoeudAppui(2, pos, TT, 1);
+    double alpha = 0.2;
+    n1.calcDebutSeg();
+    n1.calcFinSeg();
+    System.out.println(n1.debutSeg);
+    System.out.println(n1.finSeg);
+    n1.calcPos(alpha);
+    System.out.println(n1.ne);
     }
     
     public static void main(String[] args) {
-        test();
-    }
-
+    test();
+    }*/
 
     
 }

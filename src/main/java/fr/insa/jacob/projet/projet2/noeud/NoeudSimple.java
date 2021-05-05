@@ -6,6 +6,7 @@
 package fr.insa.jacob.projet.projet2.noeud;
 
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -13,33 +14,10 @@ import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
  */
 public class NoeudSimple extends Noeud{
 
-    public NoeudSimple(int idNoeud, Point ne) {
-        super(idNoeud, ne);
+    public NoeudSimple(int idNoeud, Point ne, Color couleur) {
+        super(idNoeud, ne, couleur);
     }
+    
 
-    /*    public Point getNoeudS() {
-    return noeudS;
-    }*/
-
-    /*@Override
-    public double getAbsNoeud() {
-    return this.ne.getPx();
-    }
-    
-    @Override
-    public double getOrdNoeud() {
-    return this.ne.getPy();
-    }*/
-    
-    public static void test(){
-        Point pouain = new Point(1,0);
-        NoeudSimple neu = new NoeudSimple(3, pouain);
-        System.out.println(neu.getAbsNoeud());
-        System.out.println(neu.getOrdNoeud());
-    }
-    
-    public static void main(String[] args) {
-        test();
-    }
     
 }

@@ -13,10 +13,13 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -39,13 +42,34 @@ public class MainPane extends BorderPane{
     private Button bCouleur;
     
     private DessinCanvas cDessin;
+    private ColorPicker cpCouleur;
+    
+    public MainPane(){
+        this(new Groupe(Color.BLACK));
+    }
     
     public MainPane(Groupe model){
         this.model = model;
         this.controleur = new Controleur(this);
+        
         this.rbSelect = new RadioButton("Select");
+        this.rbSelect.setOnAction((t)->{
+            this.controleur.boutonSelect(t);
+        });
         this.rbNoeud = new RadioButton("Noeud");
+        this.rbNoeud.setOnAction((t)->{//setOnAction est un écouteur
+            this.controleur.boutonNoeud(t);
+        });
         this.rbBarre = new RadioButton("Barre");
+        this.rbBarre.setOnAction((t)->{
+            this.controleur.boutonBarre(t);
+        });
+        
+        ToggleGroup bgEtat = new ToggleGroup();//permet d'ajouter un certain nombre de bouton liés entre eux donc si un sélectionné, pas l'autre
+        this.rbSelect.setToggleGroup(bgEtat);
+        this.rbNoeud.setToggleGroup(bgEtat);
+        this.rbBarre.setToggleGroup(bgEtat);
+        this.rbNoeud.setSelected(true);
         
         VBox vbGauche = new VBox(this.getRbSelect(), this.getRbNoeud(), this.getRbBarre());
         this.setLeft(vbGauche);
@@ -139,5 +163,12 @@ public class MainPane extends BorderPane{
      */
     public DessinCanvas getcDessin() {
         return cDessin;
+    }
+    
+        /**
+     * @return the cpCouleur
+     */
+    public ColorPicker getCpCouleur() {
+        return cpCouleur;
     }
 }
