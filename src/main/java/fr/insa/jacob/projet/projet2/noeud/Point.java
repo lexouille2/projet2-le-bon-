@@ -8,7 +8,10 @@ package fr.insa.jacob.projet.projet2.noeud;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
+import fr.insa.jacob.projet.projet2.treillis.Identificateur;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -77,6 +80,14 @@ public class Point extends FigureSimple{
     public void dessineSelection(GraphicsContext context) {
        context.setFill(FigureSimple.COULEUR_SELECTION);
        context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
+    }
+
+    @Override
+    public void save(Writer w, Identificateur<Treillis> num) throws IOException{
+        if(! num.objExist(this)){
+            int id = num.creeID(this);
+            w.append("Point;"+id+";"+this.px+";"+this.py+";" + FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
     }
 
 

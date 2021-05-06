@@ -32,4 +32,8 @@ public abstract class FigureSimple extends Treillis{
     public void changeCouleur(Color value) {
         this.setCouleur(value);
     }
+    
+    public static String saveColor(Color c){
+        return c.getRed()+";"+c.getGreen()+";"+c.getBlue();
+    }
 }

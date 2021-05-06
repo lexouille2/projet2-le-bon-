@@ -9,6 +9,10 @@ import static fr.insa.jacob.projet.projet2.noeud.Point.RAYON_IN_DRAW;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
+import fr.insa.jacob.projet.projet2.treillis.Identificateur;
+import fr.insa.jacob.projet.projet2.treillis.Treillis;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -56,6 +60,14 @@ public class Noeud extends FigureSimple{
     public void dessineSelection(GraphicsContext context) {
         context.setFill(FigureSimple.COULEUR_SELECTION);
         context.fillOval(this.getAbsNoeud()-RAYON_IN_DRAW, this.getOrdNoeud()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
+    }
+    
+    @Override
+    public void save(Writer w, Identificateur<Treillis> num) throws IOException{
+        if(! num.objExist(this)){
+            int id = num.creeID(this);
+            w.append("Noeud;"+id+";"+this.getAbsNoeud()+";"+this.getOrdNoeud()+";" + FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
     }
 
 }

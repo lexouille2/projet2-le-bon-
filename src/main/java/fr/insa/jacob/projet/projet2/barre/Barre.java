@@ -13,7 +13,10 @@ import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
+import fr.insa.jacob.projet.projet2.treillis.Identificateur;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -127,6 +130,16 @@ public class Barre extends FigureSimple{
     public void dessineSelection(GraphicsContext context) {
         context.setStroke(Treillis.COULEUR_SELECTION);
         context.strokeLine(this.n1.getAbsNoeud(), this.n1.getOrdNoeud(), this.n2.getAbsNoeud(), this.n2.getOrdNoeud());
+    }
+    
+    @Override
+    public void save(Writer w, Identificateur<Treillis> num) throws IOException{
+        if(! num.objExist(this)){
+            int id = num.creeID(this);
+            this.n1.save(w, num);
+            this.n2.save(w, num);
+            w.append("Barre;"+id+";"+num.getID(this.n1)+";" +num.getID(this.n2)+";"+this.type+";"+FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
     }
 }
     

@@ -8,6 +8,8 @@ package fr.insa.jacob.projet.projet2.treillis;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -37,4 +39,6 @@ public abstract class Treillis {
     public abstract void dessineSelection(GraphicsContext context);
     
     public abstract void changeCouleur(Color value);
+    
+    public abstract void save(Writer w, Identificateur<Treillis> num) throws IOException;
 }

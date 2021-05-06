@@ -9,6 +9,8 @@ import fr.insa.jacob.projet.projet2.barre.Barre;
 import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
@@ -139,4 +141,23 @@ public class Groupe extends Treillis{
         this.add(sg);
         return sg;
     }
+    
+    
+    @Override
+    public void save(Writer w, Identificateur<Treillis> num) throws IOException{
+        if (!num.objExist(this)) {
+            int id = num.creeID(this);
+            for (Treillis t : this.grpT) {
+                t.save(w, num);
+            }
+            w.append("Groupe;" + id);
+            for (Treillis t : this.grpT) {
+                w.append(";" + num.getID(t));
+            }
+            w.append("\n");
+        }
+    } 
+    
+    
+
 }
