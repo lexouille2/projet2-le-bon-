@@ -8,6 +8,11 @@ package fr.insa.jacob.projet.projet2.treillis;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
@@ -41,4 +46,54 @@ public abstract class Treillis {
     public abstract void changeCouleur(Color value);
     
     public abstract void save(Writer w, Identificateur<Treillis> num) throws IOException;
+    
+    public void sauvegarde(File fout) throws IOException {
+        Identificateur<Treillis> num = new Identificateur<Treillis>();
+        try (BufferedWriter bout = new BufferedWriter(new FileWriter(fout))) {
+            this.save(bout, num);
+        }
+    }
+
+    public static Treillis lecture(File fin) throws IOException {
+        Identificateur<Treillis> num = new Identificateur<Treillis>();
+        Treillis derniere = null;//on crée la variable qui donnera la dernière figure qu'on a lu
+        try (BufferedReader bin = new BufferedReader(new FileReader(fin))) {
+            String line;
+            while ((line = bin.readLine()) != null && line.length() != 0) {
+                String[] bouts = line.split(";");
+                if (bouts[0].equals("Point")) {
+                    int id = Integer.parseInt(bouts[1]);
+                    double px = Double.parseDouble(bouts[2]);
+                    double py = Double.parseDouble(bouts[3]);
+                    Color col = FigureSimple.parseColor(bouts[4], bouts[5], bouts[6]);
+                    Point np = new Point(px, py, col);
+                    num.associe(id, np);//id associé au point
+                    derniere = np;
+                } else if (bouts[0].equals("Barre")) {
+                    int id = Integer.parseInt(bouts[1]);
+                    int idP1 = Integer.parseInt(bouts[2]);
+                    int idP2 = Integer.parseInt(bouts[3]);
+                    Color col = FigureSimple.parseColor(bouts[4], bouts[5], bouts[6]);
+                    Point p1 = (Point) num.getObj(idP1);
+                    Point p2 = (Point) num.getObj(idP2);
+                    Barre ns = new Barre(p1, p2, col);//on crée la barre
+                    num.associe(id, ns);//id associé à la barre
+                    derniere = ns;
+                } else if (bouts[0].equals("Groupe")) {//bouts est la position dans le fichier texte
+                    int id = Integer.parseInt(bouts[1]);
+                    Groupe ng = new Groupe();
+                    num.associe(id, ng);//id associé au groupe
+                    for (int i = 2; i < bouts.length; i++) {
+                        int idSous = Integer.parseInt(bouts[i]);
+                        Treillis tre = num.getObj(idSous);
+                        ng.add(tre);
+                    }
+                    derniere = ng;
+                }
+            }
+
+        }
+        return derniere;
+    }
+}
 }

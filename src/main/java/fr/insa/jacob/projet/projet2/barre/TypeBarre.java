@@ -51,4 +51,11 @@ public class TypeBarre {
     public double getRmaxc(){
         return this.rmaxc;
     }
+
+    @Override
+    public String toString() {
+        return "TypeBarre{" + "idType=" + idType + ", cout=" + cout + ", lmin=" + lmin + ", lmax=" + lmax + ", rmaxt=" + rmaxt + ", rmaxc=" + rmaxc + '}';
+    }
+    
+    
 }

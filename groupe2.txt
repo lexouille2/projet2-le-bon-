@@ -1,0 +1,14 @@
+Noeud;2;1.0;1.0;0.0;0.0;0.0
+Noeud;3;2.0;2.0;0.0;0.0;0.0
+Barre;1;2;3;TypeBarre{idType=6, cout=1.0, lmin=2.0, lmax=3.0, rmaxt=4.0, rmaxc=5.0};0.0;0.0;0.0
+Noeud;5;2.0;2.0;0.0;0.0;0.0
+Noeud;6;3.0;3.0;0.0;0.0;0.0
+Barre;4;5;6;TypeBarre{idType=6, cout=1.0, lmin=2.0, lmax=3.0, rmaxt=4.0, rmaxc=5.0};0.0;0.0;0.0
+Noeud;9;1.0;1.0;0.0;0.0;0.0
+Noeud;10;2.0;2.0;0.0;0.0;0.0
+Barre;8;9;10;TypeBarre{idType=6, cout=1.0, lmin=2.0, lmax=3.0, rmaxt=4.0, rmaxc=5.0};0.0;0.0;0.0
+Noeud;12;2.0;2.0;0.0;0.0;0.0
+Noeud;13;3.0;3.0;0.0;0.0;0.0
+Barre;11;12;13;TypeBarre{idType=6, cout=1.0, lmin=2.0, lmax=3.0, rmaxt=4.0, rmaxc=5.0};0.0;0.0;0.0
+Groupe;7;8;11
+Groupe;0;1;4;7

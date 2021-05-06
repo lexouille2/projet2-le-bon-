@@ -24,7 +24,7 @@ public class Identificateur<TO> {
         this(0);
     }
     
-    private Identificateur(int prochainID) {
+    public Identificateur(int prochainID) {
         this.prochainID = prochainID;
         this.idVersObjet = new TreeMap<>();
         this.objetVersId = new HashMap<>();
@@ -60,24 +60,24 @@ public class Identificateur<TO> {
         }
     }
     
-    /*    public TO getObj(int id) {
-    if (! this.idExist(id)) {
-    throw new Error("identificateur non existant");
+    public TO getObj(int id) {
+        if (! this.idExist(id)) {
+            throw new Error("identificateur non existant");
+        }
+        return this.idVersObjet.get(id);
     }
-    return this.idVersObjet.get(id);
-    }*/
     
-    /*    public boolean idExist(int id) {
-    return this.idVersObjet.containsKey(id);
+    public boolean idExist(int id) {
+        return this.idVersObjet.containsKey(id);
     }
     
     public void associe(int id,TO obj) {
-    if (this.idExist(id)) {
-    throw new Error("identificateur existant");
+        if (this.idExist(id)) {//si l'id existe déjà
+            throw new Error("identificateur existant");
+        }
+        this.idVersObjet.put(id, obj);
+        this.objetVersId.put(obj, id);
     }
-    this.idVersObjet.put(id, obj);
-    this.objetVersId.put(obj, id);
-    }*/
     
     
 }

@@ -9,6 +9,7 @@ import fr.insa.jacob.projet.projet2.barre.Barre;
 import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -47,6 +48,10 @@ public class Groupe extends Treillis{
         for (Treillis t : this.grpT){
             t.dessine(context);
         }
+    }
+    
+    public int size() {
+        return this.grpT.size();
     }
     
     public Treillis plusProche(Point p, double distMax) {
@@ -157,7 +162,61 @@ public class Groupe extends Treillis{
             w.append("\n");
         }
     } 
-    
-    
 
+    @Override
+    public String toString() {
+        String res = "Groupe {\n";
+        for (int i = 0; i < this.grpT.size(); i++) {
+            res = res + indente(this.grpT.get(i).toString(), "  ") + "\n";
+        }
+        return res + "}";
+    }
+
+    public static String indente(String toIndente, String prefix) {
+        return prefix + toIndente.replaceAll("\n", "\n" + prefix);
+    }
+    
+    public static void exempleProblemeSauvegarde() {
+        Point p11 = new Point(1, 1);
+        Point p12 = new Point(2, 2);
+        Point p13 = new Point(2, 2);
+        Point p14 = new Point(3, 3);
+        TypeBarre type = new TypeBarre(1,2,3,4,5,6);
+        Barre s11 = new Barre(3, new Noeud(5,p11), new Noeud(6, p12),type);
+        Barre s12 = new Barre(5, new Noeud(7,p13), new Noeud(8, p14),type);
+        Groupe gr1 = new Groupe();
+        gr1.add(s11);
+        gr1.add(s12);
+        Point p21 = new Point(1, 1);
+        Point p22 = new Point(2, 2);
+        Point p24 = new Point(3, 3);
+        Barre s21 = new Barre(0,new Noeud(1,p21), new Noeud (2,p22), type);
+        Barre s22 = new Barre(3, new Noeud(4,p22),new Noeud(5, p24),type);
+        Groupe gr2 = new Groupe();
+        gr2.add(s21);
+        gr2.add(s22);
+        gr2.add(gr1);
+        System.out.println("Groupe 1 : " + gr1);
+        System.out.println("Groupe 2 : " + gr2);
+        try {
+            gr1.sauvegarde(new File("groupe1.txt"));
+            gr2.sauvegarde(new File("groupe2.txt"));
+        } catch (IOException ex) {
+            throw new Error("probleme : " + ex.getMessage());
+        }
+    }
+    
+    public static void testLecture() {
+        try {
+            Treillis lu = Treillis.lecture(new File("groupe2.txt"));
+            System.out.println("fig lue : " + lu);
+            } catch (IOException ex) {
+            throw new Error(ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        //exempleProblemeSauvegarde();
+        testLecture();
+    }
 }
