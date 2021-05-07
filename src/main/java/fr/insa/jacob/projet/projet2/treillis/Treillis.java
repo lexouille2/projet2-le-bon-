@@ -72,11 +72,11 @@ public abstract class Treillis {
                     derniere = np;
                 }else if (bouts[0].equals("Noeud")) {
                     int id = Integer.parseInt(bouts[1]);
-                    int idP = Integer.parseInt(bouts[2]);
-                    /*                    double px = Double.parseDouble(bouts[2]);
-                    double py = Double.parseDouble(bouts[3]);*/
-                    Color col = FigureSimple.parseColor(bouts[3], bouts[4], bouts[5]);
-                    Point point = (Point) num.getObj(idP);
+                   // int idP = Integer.parseInt(bouts[2]);
+                    double px = Double.parseDouble(bouts[2]);
+                    double py = Double.parseDouble(bouts[3]);
+                    Color col = FigureSimple.parseColor(bouts[4], bouts[5], bouts[6]);
+                    Point point = new Point(px,py);
                     Noeud nn = new Noeud(id,point,col);
                     num.associe(id, nn);//id associé au noeud
                     derniere = nn;
