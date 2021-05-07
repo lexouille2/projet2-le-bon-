@@ -8,6 +8,7 @@ package fr.insa.jacob.projet.projet2;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -33,8 +34,9 @@ public class MainPane extends BorderPane{
     
     private Groupe model;
     private Controleur controleur;
-    /*    private Stage inStage;*/
-    
+    private Stage inStage;
+    private File curFile;
+        
     private RadioButton rbSelect;
     private RadioButton rbNoeud;
     private RadioButton rbBarre;
@@ -43,13 +45,19 @@ public class MainPane extends BorderPane{
     private ColorPicker cpCouleur;
     
     private DessinCanvas cDessin;
+    private MainMenu menu;
     
-    public MainPane(){
-        this(new Groupe());
+    public MainPane(Stage inStage){
+        this(inStage, new Groupe());
     }
     
-    public MainPane(Groupe model){
-        
+    public MainPane(Stage inStage, Groupe model){
+        this(inStage, null, model);
+    }
+    
+    public MainPane(Stage inStage, File fromFile, Groupe model) {
+        this.inStage = inStage;
+        this.curFile = fromFile;
         this.model = model;
         this.controleur = new Controleur(this);
         
@@ -98,6 +106,11 @@ public class MainPane extends BorderPane{
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
         this.controleur.changeEtat(30);
+        
+        this.menu = new MainMenu(this);
+        this.setTop(this.menu);
+        
+        this.controleur.changeEtat(20);
     }
     
     public void redrawAll(){
@@ -117,14 +130,6 @@ public class MainPane extends BorderPane{
     public Controleur getControleur() {
         return controleur;
     }
-    
-    /*    public MainPane(Stage inStage){
-    this(inStage, new GroupeTT());
-    }*/
-    
-    /*    public MainPane(Stage inStage, GroupeTT model){
-    this(inStage, null, model);
-    }*/
 
     /**
      * @return the rbSelect
@@ -166,5 +171,17 @@ public class MainPane extends BorderPane{
      */
     public ColorPicker getCpCouleur() {
         return cpCouleur;
+    }
+    
+    public Stage getInStage() {
+        return inStage;
+    }
+
+    public File getCurFile() {
+        return curFile;
+    }
+
+    public void setCurFile(File curFile) {
+        this.curFile = curFile;
     }
 }

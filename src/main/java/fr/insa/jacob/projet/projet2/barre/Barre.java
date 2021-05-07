@@ -28,18 +28,18 @@ public class Barre extends FigureSimple{
     
     private int idBarre;
     private Noeud n1, n2; 
-    private TypeBarre type;
+//    private TypeBarre type;
 
-    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type, Color couleur) {
+    public Barre(int idBarre, Noeud n1, Noeud n2, /*TypeBarre type,*/ Color couleur) {
         super(couleur);
         this.idBarre = idBarre;
         this.n1 = n1;
         this.n2 = n2;
-        this.type = type;
+        //this.type = type;
     }
 
-    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type) {
-        this(idBarre,n1,n2,type,Color.BLACK);
+    public Barre(int idBarre, Noeud n1, Noeud n2 /*TypeBarre type*/) {
+        this(idBarre,n1,n2,/*type,*/Color.BLACK);
     }
     
     public int getIdBarre() {
@@ -54,9 +54,9 @@ public class Barre extends FigureSimple{
         return n2;
     }
 
-    public TypeBarre getType() {
-        return type;
-    }
+    /*    public TypeBarre getType() {
+    return type;
+    }*/
     
     public double longueurBarre() {
         double dx = this.n1.getAbsNoeud() - this.n2.getAbsNoeud();
@@ -66,7 +66,7 @@ public class Barre extends FigureSimple{
         
     @Override
     public String toString() {
-        return "Barre{" + "idBarre=" + idBarre + ", n1=" + n1 + ", n2=" + n2 + ", type=" + type + '}';
+        return "Barre{" + "idBarre=" + idBarre + ", n1=" + n1 + ", n2=" + n2 + /*", type=" + type + */'}';
     }
     
     /*public void dessine(GraphicsContext context){
@@ -132,13 +132,13 @@ public class Barre extends FigureSimple{
         context.strokeLine(this.n1.getAbsNoeud(), this.n1.getOrdNoeud(), this.n2.getAbsNoeud(), this.n2.getOrdNoeud());
     }
     
-    @Override
     public void save(Writer w, Identificateur<Treillis> num) throws IOException{
         if(! num.objExist(this)){
             int id = num.creeID(this);
             this.n1.save(w, num);
             this.n2.save(w, num);
-            w.append("Barre;"+id+";"+num.getID(this.n1)+";" +num.getID(this.n2)+";"+this.type+";"+FigureSimple.saveColor(this.getCouleur())+"\n");
+            /*            this.type.save(w, num);*/
+            w.append("Barre;"+id+";"+num.getID(this.n1)+";" +num.getID(this.n2)+";"+/*num.getID(this.type)+";"+*/FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
 }

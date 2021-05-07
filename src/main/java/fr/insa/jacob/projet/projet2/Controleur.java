@@ -12,11 +12,17 @@ import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  *
@@ -103,7 +109,7 @@ public class Controleur {
             Point pointPos2 = new Point (px2,py2);
             Color col = this.vue.getCpCouleur().getValue();
             TypeBarre tip = new TypeBarre (1,2,3,4,5,6);
-            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2)),tip));
+            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2))));
             this.vue.redrawAll(); //on redessine le model qui a été modifié
             this.changeEtat(40);
         }
@@ -153,4 +159,82 @@ public class Controleur {
         }
     }
 
+    void realSave(File f) {
+        try {
+            this.vue.getModel().sauvegarde(f);
+            this.vue.setCurFile(f);
+            this.vue.getInStage().setTitle(f.getName());
+        } catch (IOException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Problème durant la sauvegarde");
+            alert.setContentText(ex.getLocalizedMessage());
+
+            alert.showAndWait();
+        } finally {
+            this.changeEtat(20);
+        }
+    }
+
+    void menuSave(ActionEvent t) {
+        if (this.vue.getCurFile() == null) {
+            this.menuSaveAs(t);
+        } else {
+            this.realSave(this.vue.getCurFile());
+        }
+    }
+
+    void menuSaveAs(ActionEvent t) {
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showSaveDialog(this.vue.getInStage());
+        if (f != null) {
+            this.realSave(f);
+        }
+    }
+
+    void menuOpen(ActionEvent t) {
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showOpenDialog(this.vue.getInStage());
+        if (f != null) {
+            try {
+                Treillis lu = Treillis.lecture(f);
+                Groupe glu = (Groupe) lu;
+                Stage nouveau = new Stage();
+                nouveau.setTitle(f.getName());
+                Scene sc = new Scene(new MainPane(nouveau, f, glu), 800, 600);
+                nouveau.setScene(sc);
+                nouveau.show();
+            } catch (Exception ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Problème durant la sauvegarde");
+                alert.setContentText(ex.getLocalizedMessage());
+
+                alert.showAndWait();
+            } finally {
+                this.changeEtat(20);
+            }
+        }
+    }
+//    }
+
+    void menuNouveau(ActionEvent t) {
+        Stage nouveau = new Stage();
+        nouveau.setTitle("Nouveau");
+        Scene sc = new Scene(new MainPane(nouveau), 800, 600);
+        nouveau.setScene(sc);
+        nouveau.show();
+    }
+
+    void menuApropos(ActionEvent t) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("A propos");
+        alert.setHeaderText(null);
+        alert.setContentText("Trop super ce micro-logiciel de dessin vectoriel 2D\n"
+                + "réalisé par François de Bertrand de Beuvron\n"
+                + "comme tutoriel pour un cours de POO\n"
+                + "à l'INSA de Strasbourg");
+
+        alert.showAndWait();
+    }
 }

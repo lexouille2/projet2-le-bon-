@@ -5,6 +5,7 @@
  */
 package fr.insa.jacob.projet.projet2.treillis;
 
+import fr.insa.jacob.projet.projet2.barre.Barre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
@@ -69,16 +70,26 @@ public abstract class Treillis {
                     Point np = new Point(px, py, col);
                     num.associe(id, np);//id associé au point
                     derniere = np;
+                }else if (bouts[0].equals("Noeud")) {
+                    int id = Integer.parseInt(bouts[1]);
+                    int idP = Integer.parseInt(bouts[2]);
+                    /*                    double px = Double.parseDouble(bouts[2]);
+                    double py = Double.parseDouble(bouts[3]);*/
+                    Color col = FigureSimple.parseColor(bouts[3], bouts[4], bouts[5]);
+                    Point point = (Point) num.getObj(idP);
+                    Noeud nn = new Noeud(id,point,col);
+                    num.associe(id, nn);//id associé au noeud
+                    derniere = nn;
                 } else if (bouts[0].equals("Barre")) {
                     int id = Integer.parseInt(bouts[1]);
-                    int idP1 = Integer.parseInt(bouts[2]);
-                    int idP2 = Integer.parseInt(bouts[3]);
+                    int idN1 = Integer.parseInt(bouts[2]);
+                    int idN2 = Integer.parseInt(bouts[3]);
                     Color col = FigureSimple.parseColor(bouts[4], bouts[5], bouts[6]);
-                    Point p1 = (Point) num.getObj(idP1);
-                    Point p2 = (Point) num.getObj(idP2);
-                    Barre ns = new Barre(p1, p2, col);//on crée la barre
-                    num.associe(id, ns);//id associé à la barre
-                    derniere = ns;
+                    Noeud n1 = (Noeud) num.getObj(idN1);
+                    Noeud n2 = (Noeud) num.getObj(idN2);
+                    Barre nb = new Barre(id, n1, n2, col);//on crée la barre
+                    num.associe(id, nb);//id associé à la barre
+                    derniere = nb;
                 } else if (bouts[0].equals("Groupe")) {//bouts est la position dans le fichier texte
                     int id = Integer.parseInt(bouts[1]);
                     Groupe ng = new Groupe();
@@ -96,4 +107,4 @@ public abstract class Treillis {
         return derniere;
     }
 }
-}
+

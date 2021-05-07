@@ -48,7 +48,7 @@ public class Identificateur<TO> {
         if (this.objExist(obj)) {
             return this.objetVersId.get(obj);
         } else {
-            throw new Error("Objet" + obj + " inconnu dans numéroteur");
+            throw new Error("Objet " + obj + " inconnu dans numéroteur");
         }
     }
 

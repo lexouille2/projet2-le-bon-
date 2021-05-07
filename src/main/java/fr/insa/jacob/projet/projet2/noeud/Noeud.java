@@ -66,7 +66,8 @@ public class Noeud extends FigureSimple{
     public void save(Writer w, Identificateur<Treillis> num) throws IOException{
         if(! num.objExist(this)){
             int id = num.creeID(this);
-            w.append("Noeud;"+id+";"+this.getAbsNoeud()+";"+this.getOrdNoeud()+";" + FigureSimple.saveColor(this.getCouleur())+"\n");
+            int idNe = num.creeID(this.ne);
+            w.append("Noeud;"+id+";"+num.getID(this.ne)+";" + FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
 

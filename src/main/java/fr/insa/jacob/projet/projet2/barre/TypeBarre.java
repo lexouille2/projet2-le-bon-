@@ -5,11 +5,20 @@
  */
 package fr.insa.jacob.projet.projet2.barre;
 
+import fr.insa.jacob.projet.projet2.noeud.Point;
+import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
+import fr.insa.jacob.projet.projet2.treillis.Identificateur;
+import fr.insa.jacob.projet.projet2.treillis.Treillis;
+import java.io.IOException;
+import java.io.Writer;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author PC
  */
-public class TypeBarre {
+public class TypeBarre{
     
     private int idType;
     private double cout;
@@ -18,7 +27,7 @@ public class TypeBarre {
     private double rmaxt; //résistance max à la tension
     private double rmaxc; //résistance max à la compression
     
-    public TypeBarre(double cout, double lmin, double lmax, double rmaxt, double rmaxc, int idType){
+    public TypeBarre(int idType, double cout, double lmin, double lmax, double rmaxt, double rmaxc){
         
         this.idType = idType;
         this.lmin = lmin;
@@ -57,5 +66,11 @@ public class TypeBarre {
         return "TypeBarre{" + "idType=" + idType + ", cout=" + cout + ", lmin=" + lmin + ", lmax=" + lmax + ", rmaxt=" + rmaxt + ", rmaxc=" + rmaxc + '}';
     }
     
-    
+    /*    public void save(Writer w, Identificateur<Treillis> num) throws IOException{
+    if(! num.objExist(this)){
+    int id = num.creeID(this);
+    w.append("TypeBarre;"+id+";"+this.cout+";" +this.lmin+";"+this.lmax+";"+ this.rmaxt +";"+ this.rmaxc+"\n");
+    }
+    }*/
+
 }

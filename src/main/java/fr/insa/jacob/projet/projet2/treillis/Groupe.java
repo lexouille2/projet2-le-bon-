@@ -85,8 +85,8 @@ public class Groupe extends Treillis{
     Noeud n5 = new Noeud (2,p2);
     Noeud n6 = new Noeud (3,p3);
     TypeBarre tip = new TypeBarre(1,1,1,1,1,1);
-    Barre b1 = new Barre(8, n4, n5, tip);
-    Barre b2 = new Barre(8, n4, n6, tip);
+    Barre b1 = new Barre(8, n4, n5);
+    Barre b2 = new Barre(8, n4, n6);
     Groupe grpfS = new Groupe();
     grpfS.add(b1);
     grpfS.add(b2);
@@ -181,17 +181,24 @@ public class Groupe extends Treillis{
         Point p12 = new Point(2, 2);
         Point p13 = new Point(2, 2);
         Point p14 = new Point(3, 3);
+        Noeud n11 = new Noeud(12,p11);
+        Noeud n12 = new Noeud(13, p12);
+        Noeud n13 = new Noeud(14, p13);
+        Noeud n14 = new Noeud(15, p14);
         TypeBarre type = new TypeBarre(1,2,3,4,5,6);
-        Barre s11 = new Barre(3, new Noeud(5,p11), new Noeud(6, p12),type);
-        Barre s12 = new Barre(5, new Noeud(7,p13), new Noeud(8, p14),type);
+        Barre s11 = new Barre(3, n11, n12);
+        Barre s12 = new Barre(5, n13, n14);
         Groupe gr1 = new Groupe();
         gr1.add(s11);
         gr1.add(s12);
         Point p21 = new Point(1, 1);
         Point p22 = new Point(2, 2);
         Point p24 = new Point(3, 3);
-        Barre s21 = new Barre(0,new Noeud(1,p21), new Noeud (2,p22), type);
-        Barre s22 = new Barre(3, new Noeud(4,p22),new Noeud(5, p24),type);
+        Noeud n21 = new Noeud(9,p21);
+        Noeud n22 = new Noeud(10, p22);
+        Noeud n24 = new Noeud(11, p24);
+        Barre s21 = new Barre(0,n21, n22);
+        Barre s22 = new Barre(3, n22,n24);
         Groupe gr2 = new Groupe();
         gr2.add(s21);
         gr2.add(s22);
@@ -216,7 +223,7 @@ public class Groupe extends Treillis{
     }
 
     public static void main(String[] args) {
-        //exempleProblemeSauvegarde();
-        testLecture();
+        exempleProblemeSauvegarde();
+        //testLecture();
     }
 }
