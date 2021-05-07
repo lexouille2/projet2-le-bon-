@@ -76,6 +76,15 @@ public class Groupe extends Treillis{
             }
         }
     }
+    
+    
+    public void remove(Treillis t) {
+        if (t.getGrp() != this) {
+            throw new Error("la figure n'est pas dans le groupe");
+        }
+        this.grpT.remove(t);
+        t.setGrp(null);
+    }
         
     public static Groupe groupeTest(){
     Point p1 = new Point (10,10);

@@ -43,6 +43,7 @@ public class MainPane extends BorderPane{
     
     private Button bGrouper;
     private ColorPicker cpCouleur;
+    private Button bSupprimer;
     
     private DessinCanvas cDessin;
     private MainMenu menu;
@@ -86,21 +87,22 @@ public class MainPane extends BorderPane{
         this.bGrouper = new Button ("Grouper");
         this.bGrouper.setOnAction((t)->{
             this.controleur.boutonGrouper(t);
-            System.out.println("bouton Grouper cliqué");
+            //System.out.println("bouton Grouper cliqué");
+        });
+        
+        this.bSupprimer = new Button("Supprimer");
+        this.bSupprimer.setOnAction((t)->{
+            System.out.println("Bouton supprimer");
+            this.controleur.boutonSupprimer(t);
         });
         
         this.cpCouleur = new ColorPicker(Color.BLACK);
         this.cpCouleur.setOnAction((t)->{
-            System.out.println("Bouton couleur ");
+            //System.out.println("Bouton couleur ");
             this.controleur.changeColor(this.cpCouleur.getValue());
         });
         
-        /*        this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>(){
-        public void handle(MouseEvent t){
-        System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
-        }
-        });*/
-        VBox vbDroit = new VBox(this.bGrouper, this.cpCouleur);
+        VBox vbDroit = new VBox(this.bGrouper, this.bSupprimer, this.cpCouleur);
         this.setRight(vbDroit);
         
         this.cDessin = new DessinCanvas(this);
@@ -157,6 +159,10 @@ public class MainPane extends BorderPane{
      */
     public Button getbGrouper() {
         return bGrouper;
+    }
+    
+    public Button getbSupprimer(){
+        return bSupprimer;
     }
 
     /**

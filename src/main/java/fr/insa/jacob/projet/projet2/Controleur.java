@@ -55,12 +55,14 @@ public class Controleur {
             this.vue.getRbNoeud().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
         } else if (nouvelEtat == 40) { // bouton barre
             // creation de segments étape 1
             this.vue.getRbBarre().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
         } else if (nouvelEtat == 41) { // 2e point du segment
             // creation de segments étape 2
@@ -129,10 +131,15 @@ public class Controleur {
     }
     
     private void activeBoutonsSuivantSelection(){
-        if(this.selection.size() < 2){
+        if((this.selection.size() < 2) && (this.selection.size() <1)){
             this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);            
+        }else if(this.selection.size() == 1 ){
+            this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(false);
         }else{
-            this.vue.getbGrouper().setDisable(false);
+            this.vue.getbGrouper().setDisable(false); 
+            this.vue.getbSupprimer().setDisable(false);
         }
     }
     
@@ -149,7 +156,15 @@ public class Controleur {
             this.vue.redrawAll();
         }
     }
-
+    
+    
+    void boutonSupprimer(ActionEvent t){
+        if (this.etat == 20 && this.selection.size() >= 1){
+            //this.selection.remove();
+            this.vue.redrawAll();
+        }
+    }
+            
     void changeColor(Color value) {
         if (this.etat == 20 && this.selection.size() > 0) {
             for (Treillis t : this.selection) {
@@ -158,7 +173,7 @@ public class Controleur {
             this.vue.redrawAll();
         }
     }
-
+    
     void realSave(File f) {
         try {
             this.vue.getModel().sauvegarde(f);

@@ -48,6 +48,7 @@ public abstract class Treillis {
     
     public abstract void save(Writer w, Identificateur<Treillis> num) throws IOException;
     
+ 
     public void sauvegarde(File fout) throws IOException {
         Identificateur<Treillis> num = new Identificateur<Treillis>();
         try (BufferedWriter bout = new BufferedWriter(new FileWriter(fout))) {
