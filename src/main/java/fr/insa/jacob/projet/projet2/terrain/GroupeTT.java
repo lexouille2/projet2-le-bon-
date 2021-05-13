@@ -23,16 +23,16 @@ public class GroupeTT extends Groupe{
     public GroupeTT() {
         this.groupeTT = new ArrayList<TriangleTerrain>();
     }
-    
+    /*
     public void add(TriangleTerrain TT){
-        if (TT.getGroupeTT() != this){
-            if (TT.getGroupeTT() != null){
-                throw new Error ("figure deja dans un autre groupe");
-            }
-            this.groupeTT.add(TT);
-            TT.setGroupeTT(this);
-        }
+    if (TT.getGroupeTT() != this){
+    if (TT.getGroupeTT() != null){
+    throw new Error ("figure deja dans un autre groupe");
     }
+    this.groupeTT.add(TT);
+    TT.setGroupeTT(this);
+    }
+    }*/
     
     public void dessine(GraphicsContext context){
         for (TriangleTerrain TT : this.groupeTT){

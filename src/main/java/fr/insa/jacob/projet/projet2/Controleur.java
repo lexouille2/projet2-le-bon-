@@ -10,6 +10,7 @@ import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
+import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import java.io.File;
@@ -34,7 +35,7 @@ public class Controleur {
     
     private int etat;
     
-    private double[] pos1 = new double[2];//on retient px et py du premier clic
+    private double[] pos1 = new double[4];//on retient px et py du premier clic
     
    // private Point pointPos1;
     
@@ -50,28 +51,43 @@ public class Controleur {
             this.vue.getRbSelect().setSelected(true);
             this.selection.clear();
             this.vue.redrawAll();
-        } else if (nouvelEtat == 30) { // bouton noeud
+        } else if(nouvelEtat == 30) {
+            this.vue.getRbTT().setSelected(true);
+            this.selection.clear();
+            this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 40) { // bouton noeud
             // creation de points
             this.vue.getRbNoeud().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 40) { // bouton barre
+        } else if (nouvelEtat == 50) { // bouton barre
             // creation de segments étape 1
-            this.vue.getRbBarre().setSelected(true);
+            this.vue.getRbBarre1().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 41) { // 2e point du segment
+        } else if (nouvelEtat == 51) { // 2e point du segment
+            // creation de segments étape 2
+        }else if (nouvelEtat == 60) { // bouton barre
+            // creation de segments étape 1
+            this.vue.getRbBarre2().setSelected(true);
+            this.selection.clear();
+            this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 61) { // 2e point du segment
             // creation de segments étape 2
         }
         this.etat = nouvelEtat;
     }
 
     void clicDansZoneDessin(MouseEvent t) {
-        if(this.etat == 20){ //on dessine juste un point
+        if(this.etat == 20){ 
             Point pclic = new Point(t.getX(),t.getY());
             //Color col = Color.color(Math.random(), Math.random(), Math.random());
             //pas de limite de distance entre le clic et l'objet sélectionné
@@ -93,7 +109,23 @@ public class Controleur {
                 this.activeBoutonsSuivantSelection();
                 this.vue.redrawAll();
             }
-        } else if (this.etat == 30){ //pos1 retient la position du premier clic
+        } else if(this.etat == 30){
+            this.pos1[0] = t.getX();
+            this.pos1[1] = t.getY();
+            //Groupe model = this.vue.getModel();
+            this.changeEtat(31);       
+        } else if (this.etat == 31){   
+            this.pos1[2] = t.getX();
+            this.pos1[3] = t.getY();
+            this.changeEtat(32);
+        } else if (this.etat == 32) {
+            double px3 = t.getX();
+            double py3 = t.getY();
+            Color col = this.vue.getCpCouleur().getValue();
+            this.vue.getModel().add(new TriangleTerrain(3, new Point(this.pos1[0], this.pos1[1]), new Point(this.pos1[2], this.pos1[3]), new Point(px3, py3), col));
+            this.vue.redrawAll();
+            this.changeEtat(30);
+        } else if (this.etat == 40){ //pos1 retient la position du premier clic
             double px = t.getX();
             double py = t.getY();
            // Color col = this.vue.getCpCouleur().getValue();
@@ -101,11 +133,11 @@ public class Controleur {
             Groupe model = this.vue.getModel();
             model.add(new Point(px, py, col));
             this.vue.redrawAll();
-        } else if (this.etat == 40) {
+        } else if (this.etat == 50) {
             this.pos1[0] = t.getX();
             this.pos1[1] = t.getY();
-            this.changeEtat(41);
-        }else if (this.etat == 41){
+            this.changeEtat(51);
+        }else if (this.etat == 51){
             double px2 = t.getX();
             double py2 = t.getY();
             Point pointPos2 = new Point (px2,py2);
@@ -113,7 +145,20 @@ public class Controleur {
             TypeBarre tip = new TypeBarre (1,2,3,4,5,6);
             this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2))));
             this.vue.redrawAll(); //on redessine le model qui a été modifié
-            this.changeEtat(40);
+            this.changeEtat(50);
+        }else if (this.etat == 60) {
+            this.pos1[0] = t.getX();
+            this.pos1[1] = t.getY();
+            this.changeEtat(61);
+        }else if (this.etat == 61){
+            double px2 = t.getX();
+            double py2 = t.getY();
+            Point pointPos2 = new Point (px2,py2);
+            Color col = this.vue.getCpCouleur().getValue();
+            TypeBarre tip = new TypeBarre (1,2,3,4,5,6);
+            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2))));
+            this.vue.redrawAll(); //on redessine le model qui a été modifié
+            this.changeEtat(60);
         }
     }
     
@@ -122,12 +167,20 @@ public class Controleur {
         this.changeEtat(20);
     }
     
-    void boutonNoeud (ActionEvent t){
+    void boutonTT (ActionEvent t){
         this.changeEtat(30);
     }
     
-    void boutonBarre (ActionEvent t){
+    void boutonNoeud (ActionEvent t){
         this.changeEtat(40);
+    }
+    
+    void boutonBarre1 (ActionEvent t){
+        this.changeEtat(50);
+    }
+    
+    void boutonBarre2 (ActionEvent t){
+        this.changeEtat(60);
     }
     
     private void activeBoutonsSuivantSelection(){
