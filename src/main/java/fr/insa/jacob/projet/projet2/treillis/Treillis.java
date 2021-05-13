@@ -9,6 +9,7 @@ import fr.insa.jacob.projet.projet2.barre.Barre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
+import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -91,6 +92,18 @@ public abstract class Treillis {
                     Barre nb = new Barre(id, n1, n2, col);//on crée la barre
                     num.associe(id, nb);//id associé à la barre
                     derniere = nb;
+                } else if (bouts[0].equals("Triangle Terrain")){
+                    int id = Integer.parseInt(bouts[1]);
+                    int idP1 = Integer.parseInt(bouts[2]);
+                    int idP2 = Integer.parseInt(bouts[3]);
+                    int idP3 = Integer.parseInt(bouts[4]);
+                    Color col = FigureSimple.parseColor(bouts[5], bouts[6], bouts[7]);
+                    Point p1 = (Point) num.getObj(idP1);
+                    Point p2 = (Point) num.getObj(idP2);
+                    Point p3 = (Point) num.getObj(idP3);
+                    TriangleTerrain nTT = new TriangleTerrain(id, p1, p2, p3, col);
+                    num.associe(id, nTT);
+                    derniere = nTT;
                 } else if (bouts[0].equals("Groupe")) {//bouts est la position dans le fichier texte
                     int id = Integer.parseInt(bouts[1]);
                     Groupe ng = new Groupe();

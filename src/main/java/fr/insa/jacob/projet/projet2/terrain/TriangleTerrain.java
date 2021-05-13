@@ -102,7 +102,14 @@ public class TriangleTerrain extends FigureSimple{
 
     @Override
     public void save(Writer w, Identificateur<Treillis> num) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(! num.objExist(this)){
+            int id = num.creeID(this);
+            this.p1.save(w, num);
+            this.p2.save(w, num);
+            this.p3.save(w, num);
+            /*            this.type.save(w, num);*/
+            w.append("Triangle Terrain" + ";" + id + ";" + num.getID(this.p1) + ";" + num.getID(this.p2) + ";" + num.getID(this.p3) + ";" + FigureSimple.saveColor(this.getCouleur()) + "\n");
+        }
     }
     
     
