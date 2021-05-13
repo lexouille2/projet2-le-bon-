@@ -13,6 +13,8 @@ import fr.insa.jacob.projet.projet2.treillis.Identificateur;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -69,6 +71,11 @@ public class Noeud extends FigureSimple{
             //int idNe = num.creeID(this.ne);
             w.append("Noeud;"+id+";"+this.getAbsNoeud()+";" + this.getOrdNoeud()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
+    }
+
+    @Override
+    public void suppr(List<Treillis> t) {
+        t= null;
     }
 
 }

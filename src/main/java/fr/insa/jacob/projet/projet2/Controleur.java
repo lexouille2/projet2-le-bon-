@@ -210,10 +210,9 @@ public class Controleur {
         }
     }
     
-    
     void boutonSupprimer(ActionEvent t){
         if (this.etat == 20 && this.selection.size() >= 1){
-            //this.selection.remove();
+            
             this.vue.redrawAll();
         }
     }

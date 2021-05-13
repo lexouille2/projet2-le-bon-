@@ -11,6 +11,8 @@ import fr.insa.jacob.projet.projet2.treillis.Identificateur;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -51,13 +53,17 @@ public class TriangleTerrain extends FigureSimple{
         return this.idTT;
     }
 
-    /*    public GroupeTT getGroupeTT(){
-    return grpTT;
-    }*/
+    public void setP1(Point p1) {
+        this.p1 = p1;
+    }
 
-    /*    public void setGroupeTT(GroupeTT grpTT) {
-    this.grpTT = grpTT;
-    }*/
+    public void setP2(Point p2) {
+        this.p2 = p2;
+    }
+
+    public void setP3(Point p3) {
+        this.p3 = p3;
+    }
     
     
     public void dessine(GraphicsContext context){
@@ -110,6 +116,11 @@ public class TriangleTerrain extends FigureSimple{
             /*            this.type.save(w, num);*/
             w.append("Triangle Terrain" + ";" + id + ";" + num.getID(this.p1) + ";" + num.getID(this.p2) + ";" + num.getID(this.p3) + ";" + FigureSimple.saveColor(this.getCouleur()) + "\n");
         }
+    }
+
+    @Override
+    public void suppr(List<Treillis> t) {
+        t = null;
     }
     
     

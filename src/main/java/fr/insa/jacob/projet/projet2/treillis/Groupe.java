@@ -235,4 +235,10 @@ public class Groupe extends Treillis{
         exempleProblemeSauvegarde();
         //testLecture();
     }
+
+    @Override
+    public void suppr(List<Treillis> t) {
+        t = null;
+    }
+
 }

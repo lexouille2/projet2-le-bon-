@@ -17,6 +17,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -49,7 +51,8 @@ public abstract class Treillis {
     
     public abstract void save(Writer w, Identificateur<Treillis> num) throws IOException;
     
- 
+    public abstract void suppr(List<Treillis> t);
+    
     public void sauvegarde(File fout) throws IOException {
         Identificateur<Treillis> num = new Identificateur<Treillis>();
         try (BufferedWriter bout = new BufferedWriter(new FileWriter(fout))) {
