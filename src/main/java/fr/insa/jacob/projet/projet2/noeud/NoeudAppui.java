@@ -89,6 +89,8 @@ public class NoeudAppui extends Noeud {
         return this.ne;
     }
     
+    
+    
     /*    public static void test(){
     Point p1, p2, p3;
     p1 = new Point (0,0);

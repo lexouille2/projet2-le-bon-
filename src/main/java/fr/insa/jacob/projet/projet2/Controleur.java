@@ -64,6 +64,12 @@ public class Controleur {
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
+        } else if (nouvelEtat == 45) { // bouton noeud
+            this.vue.getRbNoeudA().setSelected(true);
+            this.selection.clear();
+            this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);
+            this.vue.redrawAll();
         } else if (nouvelEtat == 50) { // bouton barre
             // creation de segments étape 1
             this.vue.getRbBarre1().setSelected(true);
@@ -133,6 +139,15 @@ public class Controleur {
             Groupe model = this.vue.getModel();
             model.add(new Point(px, py, col));
             this.vue.redrawAll();
+        } else if (this.etat == 45){ //pos1 retient la position du premier clic
+            
+            
+            
+            
+            
+            Groupe model = this.vue.getModel();
+           // model.add(new Point(pclic.getPx(), pclic.getPy(), col));
+            this.vue.redrawAll();
         } else if (this.etat == 50) {
             this.pos1[0] = t.getX();
             this.pos1[1] = t.getY();
@@ -173,6 +188,10 @@ public class Controleur {
     
     void boutonNoeud (ActionEvent t){
         this.changeEtat(40);
+    }
+    
+    void boutonNoeudA (ActionEvent t){
+        this.changeEtat(45);
     }
     
     void boutonBarre1 (ActionEvent t){
