@@ -6,8 +6,11 @@
 package fr.insa.jacob.projet.projet2;
 
 import fr.insa.jacob.projet.projet2.barre.Barre;
+import fr.insa.jacob.projet.projet2.barre.BarreAcier;
+import fr.insa.jacob.projet.projet2.barre.BarreBois;
 import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
+import fr.insa.jacob.projet.projet2.noeud.NoeudAppui;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
@@ -35,9 +38,10 @@ public class Controleur {
     
     private int etat;
     
-    private double[] pos1 = new double[4];//on retient px et py du premier clic
+    private double[] pos1 = new double[4];
     
-   // private Point pointPos1;
+    private Point debutSeg;
+    private Point finSeg;
     
     private List<Treillis> selection;
     
@@ -118,7 +122,6 @@ public class Controleur {
         } else if(this.etat == 30){
             this.pos1[0] = t.getX();
             this.pos1[1] = t.getY();
-            //Groupe model = this.vue.getModel();
             this.changeEtat(31);       
         } else if (this.etat == 31){   
             this.pos1[2] = t.getX();
@@ -131,23 +134,29 @@ public class Controleur {
             this.vue.getModel().add(new TriangleTerrain(3, new Point(this.pos1[0], this.pos1[1]), new Point(this.pos1[2], this.pos1[3]), new Point(px3, py3), col));
             this.vue.redrawAll();
             this.changeEtat(30);
-        } else if (this.etat == 40){ //pos1 retient la position du premier clic
+        } else if (this.etat == 40){ 
             double px = t.getX();
             double py = t.getY();
-           // Color col = this.vue.getCpCouleur().getValue();
             Color col = Color.BLACK;
             Groupe model = this.vue.getModel();
             model.add(new Point(px, py, col));
             this.vue.redrawAll();
         } else if (this.etat == 45){ //pos1 retient la position du premier clic
-            
-            
-            
-            
-            
-            Groupe model = this.vue.getModel();
-           // model.add(new Point(pclic.getPx(), pclic.getPy(), col));
+            debutSeg = new Point(t.getX(), t.getY());
+            this.changeEtat(46);
+        }else if(this.etat == 46){
+            finSeg = new Point(t.getX(), t.getY());
+            this.changeEtat(47);
+        }else if(this.etat == 47){
+            Point clic3 = new Point(t.getX(), t.getY());
+            double distDebAlpha = distanceAlpha(debutSeg, clic3);
+            double distFinAlpha = distanceAlpha(finSeg, clic3);
+            double distTot = distDebAlpha + distFinAlpha;
+            double ALPHA = distDebAlpha / distTot;
+            Point pouain = calcPos(debutSeg, finSeg, clic3, 1-ALPHA);
+            this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain, Color.BLUE));
             this.vue.redrawAll();
+            this.changeEtat(45);
         } else if (this.etat == 50) {
             this.pos1[0] = t.getX();
             this.pos1[1] = t.getY();
@@ -156,9 +165,9 @@ public class Controleur {
             double px2 = t.getX();
             double py2 = t.getY();
             Point pointPos2 = new Point (px2,py2);
-            Color col = this.vue.getCpCouleur().getValue();
-            TypeBarre tip = new TypeBarre (1,2,3,4,5,6);
-            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2))));
+            //Color col = this.vue.getCpCouleur().getValue();
+            TypeBarre tip = new BarreAcier();
+            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2)), tip));
             this.vue.redrawAll(); //on redessine le model qui a été modifié
             this.changeEtat(50);
         }else if (this.etat == 60) {
@@ -169,9 +178,9 @@ public class Controleur {
             double px2 = t.getX();
             double py2 = t.getY();
             Point pointPos2 = new Point (px2,py2);
-            Color col = this.vue.getCpCouleur().getValue();
-            TypeBarre tip = new TypeBarre (1,2,3,4,5,6);
-            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2))));
+            //Color col = this.vue.getCpCouleur().getValue();
+            TypeBarre tip = new BarreBois();
+            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2)), tip));
             this.vue.redrawAll(); //on redessine le model qui a été modifié
             this.changeEtat(60);
         }
@@ -323,4 +332,28 @@ public class Controleur {
 
         alert.showAndWait();
     }
+    
+    
+    
+    public double distanceAlpha(Point p1, Point p2) {
+        double dx = p1.getPx() - p2.getPx();
+        double dy = p1.getPy() - p2.getPy();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    
+    public Point calcPos(Point debutSeg, Point finSeg, Point ne, double alpha){
+        double absPos = ne.getPx();
+        double ordPos = ne.getPy();
+        double absDebut = debutSeg.getPx();
+        double ordDebut = debutSeg.getPy();
+        double absFin = finSeg.getPx();
+        double ordFin = finSeg.getPy();
+        absPos = (1 - alpha) * absFin + absDebut * alpha;
+        ordPos = (1 - alpha) * ordFin + alpha * ordDebut;
+        Point point = new Point(absPos, ordPos);
+        ne = point;
+        return ne;
+    }
+    
+    
 }

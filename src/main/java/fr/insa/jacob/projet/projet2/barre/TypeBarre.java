@@ -5,13 +5,6 @@
  */
 package fr.insa.jacob.projet.projet2.barre;
 
-import fr.insa.jacob.projet.projet2.noeud.Point;
-import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
-import fr.insa.jacob.projet.projet2.treillis.Identificateur;
-import fr.insa.jacob.projet.projet2.treillis.Treillis;
-import java.io.IOException;
-import java.io.Writer;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
@@ -26,8 +19,9 @@ public class TypeBarre{
     private double lmax;
     private double rmaxt; //résistance max à la tension
     private double rmaxc; //résistance max à la compression
+    private Color col;
     
-    public TypeBarre(int idType, double cout, double lmin, double lmax, double rmaxt, double rmaxc){
+    public TypeBarre(int idType, double cout, double lmin, double lmax, double rmaxt, double rmaxc, Color col){
         
         this.idType = idType;
         this.lmin = lmin;
@@ -35,6 +29,7 @@ public class TypeBarre{
         this.lmax = lmax;
         this.rmaxt = rmaxt;
         this.rmaxc = rmaxc;
+        this.col = col;
     }
     
     public int getIdType(){
@@ -61,6 +56,10 @@ public class TypeBarre{
         return this.rmaxc;
     }
 
+    public Color getCol() {
+        return col;
+    }
+    
     @Override
     public String toString() {
         return "TypeBarre{" + "idType=" + idType + ", cout=" + cout + ", lmin=" + lmin + ", lmax=" + lmax + ", rmaxt=" + rmaxt + ", rmaxc=" + rmaxc + '}';

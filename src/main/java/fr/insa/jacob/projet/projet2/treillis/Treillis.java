@@ -6,6 +6,8 @@
 package fr.insa.jacob.projet.projet2.treillis;
 
 import fr.insa.jacob.projet.projet2.barre.Barre;
+import fr.insa.jacob.projet.projet2.barre.BarreBois;
+import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
@@ -92,7 +94,8 @@ public abstract class Treillis {
                     Color col = FigureSimple.parseColor(bouts[4], bouts[5], bouts[6]);
                     Noeud n1 = (Noeud) num.getObj(idN1);
                     Noeud n2 = (Noeud) num.getObj(idN2);
-                    Barre nb = new Barre(id, n1, n2, col);//on crée la barre
+                    TypeBarre teap = new BarreBois();
+                    Barre nb = new Barre(id, n1, n2, teap);//on crée la barre
                     num.associe(id, nb);//id associé à la barre
                     derniere = nb;
                 } else if (bouts[0].equals("Triangle Terrain")){
@@ -123,5 +126,12 @@ public abstract class Treillis {
         }
         return derniere;
     }
+    
+    
+    
+    
+    
+    
+    
 }
 

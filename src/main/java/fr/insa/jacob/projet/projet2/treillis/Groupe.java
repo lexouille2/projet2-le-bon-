@@ -6,6 +6,8 @@
 package fr.insa.jacob.projet.projet2.treillis;
 
 import fr.insa.jacob.projet.projet2.barre.Barre;
+import fr.insa.jacob.projet.projet2.barre.BarreAcier;
+import fr.insa.jacob.projet.projet2.barre.BarreBois;
 import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.Point;
@@ -93,9 +95,10 @@ public class Groupe extends Treillis{
     Noeud n4 = new Noeud (1,p1);
     Noeud n5 = new Noeud (2,p2);
     Noeud n6 = new Noeud (3,p3);
-    TypeBarre tip = new TypeBarre(1,1,1,1,1,1);
-    Barre b1 = new Barre(8, n4, n5);
-    Barre b2 = new Barre(8, n4, n6);
+    TypeBarre tip = new BarreBois();
+    TypeBarre teep = new BarreAcier();
+    Barre b1 = new Barre(8, n4, n5, tip);
+    Barre b2 = new Barre(8, n4, n6, teep);
     Groupe grpfS = new Groupe();
     grpfS.add(b1);
     grpfS.add(b2);
@@ -194,9 +197,9 @@ public class Groupe extends Treillis{
         Noeud n12 = new Noeud(13, p12);
         Noeud n13 = new Noeud(14, p13);
         Noeud n14 = new Noeud(15, p14);
-        TypeBarre type = new TypeBarre(1,2,3,4,5,6);
-        Barre s11 = new Barre(3, n11, n12);
-        Barre s12 = new Barre(5, n13, n14);
+        TypeBarre type = new BarreAcier();
+        Barre s11 = new Barre(3, n11, n12, type);
+        Barre s12 = new Barre(5, n13, n14, type);
         Groupe gr1 = new Groupe();
         gr1.add(s11);
         gr1.add(s12);
@@ -206,8 +209,8 @@ public class Groupe extends Treillis{
         Noeud n21 = new Noeud(9,p21);
         Noeud n22 = new Noeud(10, p22);
         Noeud n24 = new Noeud(11, p24);
-        Barre s21 = new Barre(0,n21, n22);
-        Barre s22 = new Barre(3, n22,n24);
+        Barre s21 = new Barre(0,n21, n22, type);
+        Barre s22 = new Barre(3, n22,n24, type);
         Groupe gr2 = new Groupe();
         gr2.add(s21);
         gr2.add(s22);

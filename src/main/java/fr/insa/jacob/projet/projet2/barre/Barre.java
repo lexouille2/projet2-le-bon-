@@ -30,18 +30,18 @@ public class Barre extends FigureSimple{
     
     private int idBarre;
     private Noeud n1, n2; 
-//    private TypeBarre type;
+    private TypeBarre type;
 
-    public Barre(int idBarre, Noeud n1, Noeud n2, /*TypeBarre type,*/ Color couleur) {
-        super(couleur);
+    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type, Color couleur) {
+        super(type.getCol());
         this.idBarre = idBarre;
         this.n1 = n1;
         this.n2 = n2;
-        //this.type = type;
+        this.type = type;
     }
 
-    public Barre(int idBarre, Noeud n1, Noeud n2 /*TypeBarre type*/) {
-        this(idBarre,n1,n2,/*type,*/Color.BLACK);
+    public Barre(int idBarre, Noeud n1, Noeud n2, TypeBarre type) {
+        this(idBarre,n1,n2,type,type.getCol());
     }
     
     public int getIdBarre() {
