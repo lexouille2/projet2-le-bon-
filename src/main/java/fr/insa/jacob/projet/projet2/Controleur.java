@@ -43,6 +43,11 @@ public class Controleur {
     private Point debutSeg;
     private Point finSeg;
     
+    private Noeud debutBarre;
+    //private Noeud finBarre;
+    
+    private ArrayList<Noeud> ANoeud = new ArrayList<Noeud>();
+    
     private List<Treillis> selection;
     
     public Controleur(MainPane vue){
@@ -139,7 +144,9 @@ public class Controleur {
             double py = t.getY();
             Color col = Color.BLACK;
             Groupe model = this.vue.getModel();
-            model.add(new Point(px, py, col));
+            model.add(new Noeud(0, new Point(px, py), col));
+            this.ANoeud.add(new Noeud(0, new Point(px, py), col));
+            System.out.println(ANoeud);
             this.vue.redrawAll();
         } else if (this.etat == 45){ //pos1 retient la position du premier clic
             debutSeg = new Point(t.getX(), t.getY());
@@ -154,35 +161,142 @@ public class Controleur {
             double distTot = distDebAlpha + distFinAlpha;
             double ALPHA = distDebAlpha / distTot;
             Point pouain = calcPos(debutSeg, finSeg, clic3, 1-ALPHA);
-            this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain, Color.BLUE));
+            this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain));
+            this.ANoeud.add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain));
             this.vue.redrawAll();
             this.changeEtat(45);
         } else if (this.etat == 50) {
-            this.pos1[0] = t.getX();
-            this.pos1[1] = t.getY();
-            this.changeEtat(51);
+            double px2 = t.getX();
+            double py2 = t.getY();
+            int z = 0;
+            int compteur = 0;
+            while (z < this.ANoeud.size()){
+                if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
+                    compteur = 1;
+                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
+                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
+                    debutBarre = this.ANoeud.get(z);
+                    System.out.println(ANoeud);
+                    this.changeEtat(51);
+                    z = this.ANoeud.size() + 1;
+                }
+                z = z+1;
+            }
+            if(compteur == 0) {
+                this.pos1[0] = t.getX();
+                this.pos1[1] = t.getY();
+                debutBarre = new Noeud(1, new Point(this.pos1[0], this.pos1[1]));
+                this.ANoeud.add(new Noeud(1, new Point(this.pos1[0], this.pos1[1])));
+                System.out.println(ANoeud);
+                this.changeEtat(51);
+            }
+            
         }else if (this.etat == 51){
             double px2 = t.getX();
             double py2 = t.getY();
-            Point pointPos2 = new Point (px2,py2);
-            //Color col = this.vue.getCpCouleur().getValue();
-            TypeBarre tip = new BarreAcier();
-            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2)), tip));
-            this.vue.redrawAll(); //on redessine le model qui a été modifié
-            this.changeEtat(50);
+            Color col = this.vue.getCpCouleur().getValue();
+            int z = 0;
+            int compteur = 0;
+            while (z < this.ANoeud.size()){
+                if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
+                    compteur = 1;
+                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
+                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
+                    //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
+                    Noeud deb = debutBarre;
+                    //finBarre = this.ANoeud.get(z);
+                    Noeud fin = this.ANoeud.get(z);
+                    //Noeud fin = new Noeud(2,new Point(this.ANoeud.get(z).getAbsNoeud(),this.ANoeud.get(z).getOrdNoeud()), col);
+                    System.out.println(ANoeud);
+                    this.vue.getModel().add(deb);
+                    this.vue.getModel().add(fin);
+                    TypeBarre tip = new BarreAcier();
+                    this.vue.getModel().add(new Barre(1, deb, fin, tip));
+                    this.vue.redrawAll();
+                    this.changeEtat(50);
+                    z = this.ANoeud.size() + 1;
+                }
+                z = z+1;
+            }
+            if(compteur == 0){
+                //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
+                Noeud deb = debutBarre;
+                Noeud fin = new Noeud(2,new Point(px2,py2), col);
+                this.vue.getModel().add(deb);
+                this.vue.getModel().add(fin);
+                TypeBarre tip = new BarreAcier();
+                this.vue.getModel().add(new Barre(1, deb, fin, tip));
+                this.ANoeud.add(new Noeud(2,new Point(px2,py2), col));
+                System.out.println(ANoeud);
+                this.vue.redrawAll();
+                this.changeEtat(50);
+            }
+              
         }else if (this.etat == 60) {
-            this.pos1[0] = t.getX();
-            this.pos1[1] = t.getY();
-            this.changeEtat(61);
+            double px2 = t.getX();
+            double py2 = t.getY();
+            int z = 0;
+            int compteur = 0;
+            while (z < this.ANoeud.size()){
+                if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
+                    compteur = 1;
+                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
+                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
+                    debutBarre = this.ANoeud.get(z);
+                    System.out.println(ANoeud);
+                    this.changeEtat(61);
+                    z = this.ANoeud.size() + 1;
+                }
+                z = z+1;
+            }
+            if(compteur == 0) {
+                this.pos1[0] = t.getX();
+                this.pos1[1] = t.getY();
+                debutBarre = new Noeud(1, new Point(this.pos1[0], this.pos1[1]));
+                this.ANoeud.add(new Noeud(1, new Point(this.pos1[0], this.pos1[1])));
+                System.out.println(ANoeud);
+                this.changeEtat(61);
+            }
         }else if (this.etat == 61){
             double px2 = t.getX();
             double py2 = t.getY();
-            Point pointPos2 = new Point (px2,py2);
-            //Color col = this.vue.getCpCouleur().getValue();
-            TypeBarre tip = new BarreBois();
-            this.vue.getModel().add(new Barre(1, new Noeud(1,new Point(this.pos1[0],this.pos1[1])),new Noeud(2,new Point(px2,py2)), tip));
-            this.vue.redrawAll(); //on redessine le model qui a été modifié
-            this.changeEtat(60);
+            Color col = this.vue.getCpCouleur().getValue();
+            int z = 0;
+            int compteur = 0;
+            while (z < this.ANoeud.size()){
+                if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
+                    compteur = 1;
+                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
+                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
+                    //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
+                    Noeud deb = debutBarre;
+                    //finBarre = this.ANoeud.get(z);
+                    Noeud fin = this.ANoeud.get(z);
+                    //Noeud fin = new Noeud(2,new Point(this.ANoeud.get(z).getAbsNoeud(),this.ANoeud.get(z).getOrdNoeud()), col);
+                    System.out.println(ANoeud);
+                    this.vue.getModel().add(deb);
+                    this.vue.getModel().add(fin);
+                    TypeBarre teep = new BarreBois();
+                    this.vue.getModel().add(new Barre(1, deb, fin, teep));
+                    this.vue.redrawAll();
+                    this.changeEtat(60);
+                    z = this.ANoeud.size() + 1;
+                }
+                z = z+1;
+            }
+            if(compteur == 0){
+                //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
+                Noeud deb = debutBarre;
+                Noeud fin = new Noeud(2,new Point(px2,py2), col);
+                this.vue.getModel().add(deb);
+                this.vue.getModel().add(fin);
+                TypeBarre teep = new BarreBois();
+                this.vue.getModel().add(new Barre(1, deb, fin, teep));
+                this.ANoeud.add(new Noeud(2,new Point(px2,py2), col));
+                System.out.println(ANoeud);
+                this.vue.redrawAll();
+                this.changeEtat(60);
+            }
         }
     }
     

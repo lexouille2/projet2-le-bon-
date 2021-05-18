@@ -9,6 +9,7 @@ import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.NoeudAppui;
 import fr.insa.jacob.projet.projet2.noeud.NoeudSimple;
 import fr.insa.jacob.projet.projet2.noeud.Point;
+import static fr.insa.jacob.projet.projet2.noeud.Point.RAYON_IN_DRAW;
 import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
@@ -101,6 +102,8 @@ public class Barre extends FigureSimple{
     public void dessine(GraphicsContext context){
         context.setStroke(this.getCouleur());
         context.strokeLine(this.n1.getAbsNoeud(), this.n1.getOrdNoeud(), this.n2.getAbsNoeud(), this.n2.getOrdNoeud());
+        context.fillOval(this.n1.getAbsNoeud()-RAYON_IN_DRAW, this.n1.getOrdNoeud()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
+        context.fillOval(this.n2.getAbsNoeud()-RAYON_IN_DRAW, this.n2.getOrdNoeud()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     }
     
     /*    public static void main(String[] args) {

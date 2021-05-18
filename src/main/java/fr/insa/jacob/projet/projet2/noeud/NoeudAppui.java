@@ -22,7 +22,14 @@ public class NoeudAppui extends Noeud {
     //private double alpha;
 
     public NoeudAppui(int num, Point debutSeg, Point finSeg, int idNoeud, Point ne, Color couleur) {
-        super(idNoeud, ne, couleur);
+        super(idNoeud, ne, Color.BLUE);
+        this.num = num;
+        this.debutSeg = debutSeg;
+        this.finSeg = finSeg;
+    }
+    
+    public NoeudAppui(int num, Point debutSeg, Point finSeg, int idNoeud, Point ne) {
+        super(idNoeud, ne, Color.BLUE);
         this.num = num;
         this.debutSeg = debutSeg;
         this.finSeg = finSeg;
