@@ -127,9 +127,16 @@ public abstract class Treillis {
         return derniere;
     }
     
+    public static Treillis testTreillis(){
+        Groupe grp = new Groupe();
+        TriangleTerrain TT = new TriangleTerrain(0, new Point(0,0), new Point(1,0), new Point(0,1), Color.GREEN);
+        grp.add(TT);
+        return grp;
+    }
     
-    
-    
+    public static void main(String[] args) {
+        testTreillis();
+    }
     
     
     
