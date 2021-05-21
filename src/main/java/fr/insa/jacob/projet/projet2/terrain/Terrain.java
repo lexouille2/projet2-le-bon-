@@ -20,14 +20,14 @@ public class Terrain {
     private double xmax;
     private double ymin;
     private double ymax;
-    private GroupeTT grpTT;//ensemble de triangle terrain
+    private ArrayList<TriangleTerrain> aTT;
     
-    public Terrain(double xmin, double xmax, double ymin, double ymax, GroupeTT grpTT){
+    public Terrain(double xmin, double xmax, double ymin, double ymax, ArrayList<TriangleTerrain> aTT){
         this.xmin = xmin;
         this.xmax = xmax;
         this.ymax = ymax;
         this.ymin = ymin;
-        this.grpTT = grpTT;
+        this.aTT = new ArrayList<TriangleTerrain>();
     }
 
     public double getXmin() {
@@ -44,10 +44,6 @@ public class Terrain {
 
     public double getYmax() {
         return ymax;
-    }
-
-    public GroupeTT getGrpTT() {
-        return grpTT;
     }
 
     private Paint getCouleur() {

@@ -5,7 +5,6 @@
  */
 package fr.insa.jacob.projet.projet2.noeud;
 
-import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import javafx.scene.paint.Color;
 
 /**

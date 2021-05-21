@@ -5,7 +5,6 @@
  */
 package fr.insa.jacob.projet.projet2;
 
-import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import java.io.File;

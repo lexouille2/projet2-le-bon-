@@ -10,7 +10,6 @@ import fr.insa.jacob.projet.projet2.noeud.NoeudAppui;
 import fr.insa.jacob.projet.projet2.noeud.NoeudSimple;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import static fr.insa.jacob.projet.projet2.noeud.Point.RAYON_IN_DRAW;
-import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import fr.insa.jacob.projet.projet2.treillis.FigureSimple;

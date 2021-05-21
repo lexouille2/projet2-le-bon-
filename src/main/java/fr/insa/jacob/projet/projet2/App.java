@@ -1,6 +1,5 @@
 package fr.insa.jacob.projet.projet2;
 
-import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
 import javafx.application.Application;

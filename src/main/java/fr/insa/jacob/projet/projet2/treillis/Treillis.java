@@ -5,10 +5,16 @@
  */
 package fr.insa.jacob.projet.projet2.treillis;
 
+import fr.insa.jacob.projet.projet2.Matrice;
 import fr.insa.jacob.projet.projet2.barre.Barre;
+import fr.insa.jacob.projet.projet2.barre.BarreAcier;
 import fr.insa.jacob.projet.projet2.barre.BarreBois;
 import fr.insa.jacob.projet.projet2.barre.TypeBarre;
+import fr.insa.jacob.projet.projet2.noeud.AppuiDouble;
+import fr.insa.jacob.projet.projet2.noeud.AppuiSimple;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
+import fr.insa.jacob.projet.projet2.noeud.NoeudAppui;
+import fr.insa.jacob.projet.projet2.noeud.NoeudSimple;
 import fr.insa.jacob.projet.projet2.noeud.Point;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
@@ -129,8 +135,82 @@ public abstract class Treillis {
     
     public static Treillis testTreillis(){
         Groupe grp = new Groupe();
-        TriangleTerrain TT = new TriangleTerrain(0, new Point(0,0), new Point(1,0), new Point(0,1), Color.GREEN);
+        ArrayList<Noeud> an = new ArrayList<Noeud>();
+        ArrayList<Noeud> anad = new ArrayList<Noeud>();
+        ArrayList<Noeud> anas = new ArrayList<Noeud>();
+        ArrayList<Barre> aba = new ArrayList<Barre>();
+        ArrayList<TriangleTerrain> att = new ArrayList<TriangleTerrain>();
+        Point p1 = new Point(100,100);
+        Point p2 = new Point(100,200);
+        Point p3 = new Point(50,150);
+        Point p4 = new Point(150,150);
+        TriangleTerrain TT = new TriangleTerrain(1, p1, p2, p3, Color.GREEN);
+        Noeud n1 = new Noeud(1, p4);
+        Noeud nad1 = new AppuiDouble(1, p1, p2, 2, new Point(100,125), Color.BLUE);
+        Noeud nas1 = new AppuiSimple(1, p1, p2, 3, new Point(100,175), Color.BLUE);
+        Barre ba1 = new Barre(1, nad1, nas1, new BarreAcier());
+        Barre ba2 = new Barre(2, nad1, n1, new BarreAcier());
+        Barre ba3 = new Barre(3, nas1, n1, new BarreAcier());
+        
         grp.add(TT);
+        att.add(TT);
+        grp.add(nad1);
+        anad.add(nad1);
+        grp.add(nas1);
+        anas.add(nas1);
+        grp.add(ba1);
+        aba.add(ba1);
+        grp.add(n1);
+        an.add(n1);
+        grp.add(ba2);
+        aba.add(ba2);
+        grp.add(ba3);
+        aba.add(ba3);
+        
+        int nbb = aba.size(); //nb de barres
+        int nbas = anas.size(); //nb d'appui simple
+        int nbad = anad.size(); //nb d'appui double
+        int ni = nbb + nbas + 2*nbad; //nb d'inconnues
+        System.out.println("Nombre d'inconnues : " + ni); //6
+        Matrice mat = new Matrice(ni,ni);
+        double a = Math.sqrt(2)/2;
+        int i = 0; // ligne 
+        mat.coeffs[i][1] = -a;
+        mat.coeffs[i][2] = -a;
+
+        i++;
+        mat.coeffs[i][1] = a;
+        mat.coeffs[i][2] = -a;
+
+        i++;
+        mat.coeffs[i][2] = a;
+        mat.coeffs[i][5] = 1;
+
+        i++;
+        mat.coeffs[i][0] = 1;
+        mat.coeffs[i][2] = a;
+
+        i++;
+        mat.coeffs[i][1] = a;
+        mat.coeffs[i][3] = 1;
+
+        i++;
+        mat.coeffs[i][0] = -1;
+        mat.coeffs[i][1] = -a;
+        mat.coeffs[i][4] = 1;
+        System.out.println("mat : \n" + mat);
+
+        Matrice sm = new Matrice(ni, 1);
+        sm.coeffs[1][0] = 1000;
+        System.out.println("second membre : \n" + sm);
+
+        Matrice.ResSysLin res = mat.resoudSysLin(sm);
+        if (res.solUnique) {
+            System.out.println("sol : \n" + res.sol);
+        } else {
+            System.out.println("pas de sol");
+        }
+        
         return grp;
     }
     

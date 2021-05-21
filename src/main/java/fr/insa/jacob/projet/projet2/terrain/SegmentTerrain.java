@@ -5,15 +5,10 @@
  */
 package fr.insa.jacob.projet.projet2.terrain;
 
-import fr.insa.jacob.projet.projet2.noeud.Point;
-
 /**
  *
- * @author PC
+ * @author yohan
  */
 public class SegmentTerrain {
     
-    private Point debut;
-    private Point fin;
-   
 }

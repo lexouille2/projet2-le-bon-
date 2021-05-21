@@ -12,7 +12,6 @@ import fr.insa.jacob.projet.projet2.barre.TypeBarre;
 import fr.insa.jacob.projet.projet2.noeud.Noeud;
 import fr.insa.jacob.projet.projet2.noeud.NoeudAppui;
 import fr.insa.jacob.projet.projet2.noeud.Point;
-import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.TriangleTerrain;
 import fr.insa.jacob.projet.projet2.treillis.Groupe;
 import fr.insa.jacob.projet.projet2.treillis.Treillis;
@@ -44,7 +43,6 @@ public class Controleur {
     private Point finSeg;
     
     private Noeud debutBarre;
-    //private Noeud finBarre;
     
     private ArrayList<Noeud> ANoeud = new ArrayList<Noeud>();
     

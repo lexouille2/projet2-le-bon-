@@ -6,7 +6,6 @@
 package fr.insa.jacob.projet.projet2.noeud;
     
 import static fr.insa.jacob.projet.projet2.noeud.Point.RAYON_IN_DRAW;
-import fr.insa.jacob.projet.projet2.terrain.GroupeTT;
 import fr.insa.jacob.projet.projet2.terrain.Terrain;
 import fr.insa.jacob.projet.projet2.treillis.FigureSimple;
 import fr.insa.jacob.projet.projet2.treillis.Identificateur;
