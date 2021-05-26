@@ -45,6 +45,7 @@ public class DessinCanvas extends Pane{
     
     public void redrawAll(){
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
+        context.clearRect(0, 0, this.realCanvas.getWidth(), this.realCanvas.getHeight());
         Groupe model = this.main.getModel();
         model.dessine(context);
         List<Treillis> select = this.main.getControleur().getSelection();

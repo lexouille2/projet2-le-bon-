@@ -87,6 +87,12 @@ public class Groupe extends Treillis{
         this.grpT.remove(t);
         t.setGrp(null);
     }
+    
+    public void removeAll(List<Treillis> lt) {
+        for (Treillis t : lt) {
+            this.remove(t);
+        }
+    }
         
     public static Groupe groupeTest(){
     Point p1 = new Point (10,10);

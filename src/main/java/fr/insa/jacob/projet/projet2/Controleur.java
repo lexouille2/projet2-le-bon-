@@ -159,7 +159,7 @@ public class Controleur {
             double distTot = distDebAlpha + distFinAlpha;
             double ALPHA = distDebAlpha / distTot;
             Point pouain = calcPos(debutSeg, finSeg, clic3, 1-ALPHA);
-            this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain));
+            this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain, Color.BLUE));
             this.ANoeud.add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain));
             this.vue.redrawAll();
             this.changeEtat(45);
@@ -174,7 +174,7 @@ public class Controleur {
                     //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
                     //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
                     debutBarre = this.ANoeud.get(z);
-                    System.out.println(ANoeud);
+                    //System.out.println(ANoeud);
                     this.changeEtat(51);
                     z = this.ANoeud.size() + 1;
                 }
@@ -184,7 +184,9 @@ public class Controleur {
                 this.pos1[0] = t.getX();
                 this.pos1[1] = t.getY();
                 debutBarre = new Noeud(1, new Point(this.pos1[0], this.pos1[1]));
-                this.ANoeud.add(new Noeud(1, new Point(this.pos1[0], this.pos1[1])));
+                Noeud n = new Noeud(1, new Point(this.pos1[0], this.pos1[1]));
+                this.ANoeud.add(n);
+                this.vue.getModel().add(n);
                 System.out.println(ANoeud);
                 this.changeEtat(51);
             }
@@ -205,7 +207,7 @@ public class Controleur {
                     //finBarre = this.ANoeud.get(z);
                     Noeud fin = this.ANoeud.get(z);
                     //Noeud fin = new Noeud(2,new Point(this.ANoeud.get(z).getAbsNoeud(),this.ANoeud.get(z).getOrdNoeud()), col);
-                    System.out.println(ANoeud);
+                    //System.out.println(ANoeud);
                     this.vue.getModel().add(deb);
                     this.vue.getModel().add(fin);
                     TypeBarre tip = new BarreAcier();
@@ -224,8 +226,10 @@ public class Controleur {
                 this.vue.getModel().add(fin);
                 TypeBarre tip = new BarreAcier();
                 this.vue.getModel().add(new Barre(1, deb, fin, tip));
-                this.ANoeud.add(new Noeud(2,new Point(px2,py2), col));
-                System.out.println(ANoeud);
+                Noeud n = new Noeud(2,new Point(px2,py2), col);
+                this.ANoeud.add(n);
+                this.vue.getModel().add(n);
+                //System.out.println(ANoeud);
                 this.vue.redrawAll();
                 this.changeEtat(50);
             }
@@ -351,8 +355,10 @@ public class Controleur {
     }
     
     void boutonSupprimer(ActionEvent t){
-        if (this.etat == 20 && this.selection.size() >= 1){
-            
+        if (this.etat == 20 && this.selection.size() > 0) {
+            this.vue.getModel().removeAll(this.selection);
+            this.selection.clear();
+            this.activeBoutonsSuivantSelection();
             this.vue.redrawAll();
         }
     }
