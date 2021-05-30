@@ -26,7 +26,6 @@ public class TriangleTerrain extends FigureSimple{
     private Point p1;
     private Point p2;
     private Point p3;
-    //private GroupeTT grpTT;
 
     public TriangleTerrain(int idTT, Point p1, Point p2, Point p3, Color couleur) {
         super(Color.GREEN);

@@ -171,8 +171,16 @@ public abstract class Treillis {
         int nbad = anad.size(); //nb d'appui double
        
         int ni = nbb + nbas + 2*nbad; //nb d'inconnues
-        
         System.out.println("Nombre d'inconnues : " + ni); // ici 6
+        
+        int neq = nbb + nbas + 2*nbad;
+        System.out.println("Nombre d'équations : " + neq);
+        
+        if(ni == neq){
+            System.out.println("Treillis isostatique");
+        }else{
+            System.out.println("Treillis hyperstatique");
+        }
         Matrice mat = new Matrice(ni,ni);
         double a = Math.sqrt(2)/2;
         int i = 0; // ligne 

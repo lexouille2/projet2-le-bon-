@@ -70,29 +70,35 @@ public class Controleur {
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 45) { // bouton noeud
-            this.vue.getRbNoeudA().setSelected(true);
+        } else if (nouvelEtat == 50) { // bouton noeud
+            this.vue.getRbNoeudAD().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 50) { // bouton barre
+        } else if (nouvelEtat == 55) { // bouton noeud
+            this.vue.getRbNoeudAS().setSelected(true);
+            this.selection.clear();
+            this.vue.getbGrouper().setDisable(true);
+            this.vue.getbSupprimer().setDisable(true);
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 60) { // bouton barre
             // creation de segments étape 1
             this.vue.getRbBarre1().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 51) { // 2e point du segment
+        } else if (nouvelEtat == 61) { // 2e point du segment
             // creation de segments étape 2
-        }else if (nouvelEtat == 60) { // bouton barre
+        }else if (nouvelEtat == 70) { // bouton barre
             // creation de segments étape 1
             this.vue.getRbBarre2().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
-        } else if (nouvelEtat == 61) { // 2e point du segment
+        } else if (nouvelEtat == 71) { // 2e point du segment
             // creation de segments étape 2
         }
         this.etat = nouvelEtat;
@@ -140,15 +146,14 @@ public class Controleur {
             Groupe model = this.vue.getModel();
             model.add(new Noeud(0, new Point(px, py), col));
             this.ANoeud.add(new Noeud(0, new Point(px, py), col));
-            System.out.println(ANoeud);
             this.vue.redrawAll();
-        } else if (this.etat == 45){
+        } else if (this.etat == 50){
             debutSeg = new Point(t.getX(), t.getY());
-            this.changeEtat(46);
-        }else if(this.etat == 46){
+            this.changeEtat(51);
+        }else if(this.etat == 51){
             finSeg = new Point(t.getX(), t.getY());
-            this.changeEtat(47);
-        }else if(this.etat == 47){
+            this.changeEtat(52);
+        }else if(this.etat == 52){
             Point clic3 = new Point(t.getX(), t.getY());
             double distDebAlpha = distanceAlpha(debutSeg, clic3);
             double distFinAlpha = distanceAlpha(finSeg, clic3);
@@ -158,8 +163,25 @@ public class Controleur {
             this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain, Color.BLUE));
             this.ANoeud.add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain));
             this.vue.redrawAll();
-            this.changeEtat(45);
-        } else if (this.etat == 50) {
+            this.changeEtat(50);
+            } else if (this.etat == 55){
+            debutSeg = new Point(t.getX(), t.getY());
+            this.changeEtat(56);
+        }else if(this.etat == 56){
+            finSeg = new Point(t.getX(), t.getY());
+            this.changeEtat(57);
+        }else if(this.etat == 57){
+            Point clic3 = new Point(t.getX(), t.getY());
+            double distDebAlpha = distanceAlpha(debutSeg, clic3);
+            double distFinAlpha = distanceAlpha(finSeg, clic3);
+            double distTot = distDebAlpha + distFinAlpha;
+            double ALPHA = distDebAlpha / distTot;
+            Point pouain = calcPos(debutSeg, finSeg, clic3, 1-ALPHA);
+            this.vue.getModel().add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain, Color.BLUE));
+            this.ANoeud.add(new NoeudAppui(1, debutSeg, finSeg, 6, pouain));
+            this.vue.redrawAll();
+            this.changeEtat(55);
+        } else if (this.etat == 60) {
             double px2 = t.getX();
             double py2 = t.getY();
             int z = 0;
@@ -168,7 +190,7 @@ public class Controleur {
                 if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
                     compteur = 1;
                     debutBarre = this.ANoeud.get(z);
-                    this.changeEtat(51);
+                    this.changeEtat(61);
                     z = this.ANoeud.size() + 1;
                 }
                 z = z+1;
@@ -180,11 +202,10 @@ public class Controleur {
                 Noeud n = new Noeud(1, new Point(this.pos1[0], this.pos1[1]));
                 this.ANoeud.add(n);
                 this.vue.getModel().add(n);
-                System.out.println(ANoeud);
-                this.changeEtat(51);
+                this.changeEtat(61);
             }
             
-        }else if (this.etat == 51){
+        }else if (this.etat == 61){
             double px2 = t.getX();
             double py2 = t.getY();
             Color col = this.vue.getCpCouleur().getValue();
@@ -200,7 +221,7 @@ public class Controleur {
                     TypeBarre tip = new BarreAcier();
                     this.vue.getModel().add(new Barre(1, deb, fin, tip));
                     this.vue.redrawAll();
-                    this.changeEtat(50);
+                    this.changeEtat(60);
                     z = this.ANoeud.size() + 1;
                 }
                 z = z+1;
@@ -216,10 +237,10 @@ public class Controleur {
                 this.ANoeud.add(n);
                 this.vue.getModel().add(n);
                 this.vue.redrawAll();
-                this.changeEtat(50);
+                this.changeEtat(60);
             }
               
-        }else if (this.etat == 60) {
+        }else if (this.etat == 70) {
             double px2 = t.getX();
             double py2 = t.getY();
             int z = 0;
@@ -228,8 +249,7 @@ public class Controleur {
                 if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
                     compteur = 1;
                     debutBarre = this.ANoeud.get(z);
-                    System.out.println(ANoeud);
-                    this.changeEtat(61);
+                    this.changeEtat(71);
                     z = this.ANoeud.size() + 1;
                 }
                 z = z+1;
@@ -239,10 +259,9 @@ public class Controleur {
                 this.pos1[1] = t.getY();
                 debutBarre = new Noeud(1, new Point(this.pos1[0], this.pos1[1]));
                 this.ANoeud.add(new Noeud(1, new Point(this.pos1[0], this.pos1[1])));
-                System.out.println(ANoeud);
-                this.changeEtat(61);
+                this.changeEtat(71);
             }
-        }else if (this.etat == 61){
+        }else if (this.etat == 71){
             double px2 = t.getX();
             double py2 = t.getY();
             Color col = this.vue.getCpCouleur().getValue();
@@ -253,13 +272,12 @@ public class Controleur {
                     compteur = 1;
                     Noeud deb = debutBarre;
                     Noeud fin = this.ANoeud.get(z);
-                    System.out.println(ANoeud);
                     this.vue.getModel().add(deb);
                     this.vue.getModel().add(fin);
                     TypeBarre teep = new BarreBois();
                     this.vue.getModel().add(new Barre(1, deb, fin, teep));
                     this.vue.redrawAll();
-                    this.changeEtat(60);
+                    this.changeEtat(70);
                     z = this.ANoeud.size() + 1;
                 }
                 z = z+1;
@@ -272,9 +290,8 @@ public class Controleur {
                 TypeBarre teep = new BarreBois();
                 this.vue.getModel().add(new Barre(1, deb, fin, teep));
                 this.ANoeud.add(new Noeud(2,new Point(px2,py2), col));
-                System.out.println(ANoeud);
                 this.vue.redrawAll();
-                this.changeEtat(60);
+                this.changeEtat(70);
             }
         }
     }
@@ -292,16 +309,20 @@ public class Controleur {
         this.changeEtat(40);
     }
     
-    void boutonNoeudA (ActionEvent t){
-        this.changeEtat(45);
-    }
-    
-    void boutonBarre1 (ActionEvent t){
+    void boutonNoeudAD (ActionEvent t){
         this.changeEtat(50);
     }
     
-    void boutonBarre2 (ActionEvent t){
+    void boutonNoeudAS (ActionEvent t){
+        this.changeEtat(55);
+    }
+    
+    void boutonBarre1 (ActionEvent t){
         this.changeEtat(60);
+    }
+    
+    void boutonBarre2 (ActionEvent t){
+        this.changeEtat(70);
     }
     
     private void activeBoutonsSuivantSelection(){

@@ -37,7 +37,8 @@ public class MainPane extends BorderPane{
     private RadioButton rbSelect;
     private RadioButton rbTT;
     private RadioButton rbNoeud;
-    private RadioButton rbNoeudA;
+    private RadioButton rbNoeudAD;
+    private RadioButton rbNoeudAS;
     private RadioButton rbBarre1;
     private RadioButton rbBarre2;
     
@@ -67,16 +68,20 @@ public class MainPane extends BorderPane{
             this.controleur.boutonSelect(t);
         });
         this.rbTT = new RadioButton("Triangle Terrain");
-        this.rbTT.setOnAction((t)->{//setOnAction est un écouteur
+        this.rbTT.setOnAction((t)->{
             this.controleur.boutonTT(t);
         });
         this.rbNoeud = new RadioButton("Noeud Simple");
-        this.rbNoeud.setOnAction((t)->{//setOnAction est un écouteur
+        this.rbNoeud.setOnAction((t)->{
             this.controleur.boutonNoeud(t);
         });
-        this.rbNoeudA = new RadioButton("Noeud Appui");
-        this.rbNoeudA.setOnAction((t)->{//setOnAction est un écouteur
-            this.controleur.boutonNoeudA(t);
+        this.rbNoeudAD = new RadioButton("Noeud Appui Double");
+        this.rbNoeudAD.setOnAction((t)->{
+            this.controleur.boutonNoeudAD(t);
+        });
+        this.rbNoeudAS = new RadioButton("Noeud Appui Simple");
+        this.rbNoeudAS.setOnAction((t)->{
+            this.controleur.boutonNoeudAS(t);
         });
         this.rbBarre1 = new RadioButton("Barre Acier");
         this.rbBarre1.setOnAction((t)->{
@@ -90,13 +95,14 @@ public class MainPane extends BorderPane{
         ToggleGroup bgEtat = new ToggleGroup();//permet d'ajouter un certain nombre de bouton liés entre eux donc si un sélectionné, pas l'autre
         this.rbSelect.setToggleGroup(bgEtat);
         this.rbNoeud.setToggleGroup(bgEtat);
-        this.rbNoeudA.setToggleGroup(bgEtat);
+        this.rbNoeudAD.setToggleGroup(bgEtat);
+        this.rbNoeudAS.setToggleGroup(bgEtat);
         this.rbTT.setToggleGroup(bgEtat);
         this.rbBarre1.setToggleGroup(bgEtat);
         this.rbBarre2.setToggleGroup(bgEtat);
         this.rbNoeud.setSelected(true);
         
-        VBox vbGauche = new VBox(this.rbSelect, this.rbTT, this.rbNoeud, this.rbNoeudA, this.rbBarre1, this.rbBarre2);
+        VBox vbGauche = new VBox(this.rbSelect, this.rbTT, this.rbNoeud, this.rbNoeudAD, this.rbNoeudAS, this.rbBarre1, this.rbBarre2);
         this.setLeft(vbGauche);
         
         this.bGrouper = new Button ("Grouper");
@@ -164,13 +170,14 @@ public class MainPane extends BorderPane{
         return rbNoeud;
     }
 
-    public RadioButton getRbNoeudA() {
-        return rbNoeudA;
+    public RadioButton getRbNoeudAD() {
+        return rbNoeudAD;
     }
     
-    /**
-     * @return the rbBarre
-     */
+    public RadioButton getRbNoeudAS() {
+        return rbNoeudAS;
+    }
+
     public RadioButton getRbBarre1() {
         return rbBarre1;
     }

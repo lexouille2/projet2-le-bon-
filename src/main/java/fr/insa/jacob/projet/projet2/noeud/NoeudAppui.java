@@ -14,12 +14,10 @@ import javafx.scene.paint.Color;
  */
 public class NoeudAppui extends Noeud {
     
-    private static TriangleTerrain TT;
+    private TriangleTerrain TT;
     private int num;
     private Point debutSeg;
     private Point finSeg;
-    //private Point pos;        // ne = pos, si on change on remplace tous les "ne" par "pos"
-    //private double alpha;
 
     public NoeudAppui(int num, Point debutSeg, Point finSeg, int idNoeud, Point ne, Color couleur) {
         super(idNoeud, ne, Color.BLUE);
