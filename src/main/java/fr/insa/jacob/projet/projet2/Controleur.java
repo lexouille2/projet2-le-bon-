@@ -65,7 +65,6 @@ public class Controleur {
             this.vue.getbSupprimer().setDisable(true);
             this.vue.redrawAll();
         } else if (nouvelEtat == 40) { // bouton noeud
-            // creation de points
             this.vue.getRbNoeud().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
@@ -102,22 +101,19 @@ public class Controleur {
     void clicDansZoneDessin(MouseEvent t) {
         if(this.etat == 20){ 
             Point pclic = new Point(t.getX(),t.getY());
-            //Color col = Color.color(Math.random(), Math.random(), Math.random());
-            //pas de limite de distance entre le clic et l'objet sélectionné
             Treillis proche = this.vue.getModel().plusProche(pclic,Double.MAX_VALUE);
-            //il faut prévoir le cas où le groupe est vide, donc pas de plus proche
             if (proche != null) {
                 if (t.isShiftDown()) {
-                    this.selection.add(proche);//on ajoute le plus proche à la sélection courante
+                    this.selection.add(proche);
                 } else if (t.isControlDown()) {
                     if (this.selection.contains(proche)) {
-                        this.selection.remove(proche);//s'il était déjà dedans, on l'enlève
+                        this.selection.remove(proche);
                     } else {
-                        this.selection.add(proche);//sinon je le mets
+                        this.selection.add(proche);
                     }
                 } else {
                     this.selection.clear();
-                    this.selection.add(proche);//la sélection devient juste l'élément sélectionné
+                    this.selection.add(proche);
                 }
                 this.activeBoutonsSuivantSelection();
                 this.vue.redrawAll();
@@ -146,7 +142,7 @@ public class Controleur {
             this.ANoeud.add(new Noeud(0, new Point(px, py), col));
             System.out.println(ANoeud);
             this.vue.redrawAll();
-        } else if (this.etat == 45){ //pos1 retient la position du premier clic
+        } else if (this.etat == 45){
             debutSeg = new Point(t.getX(), t.getY());
             this.changeEtat(46);
         }else if(this.etat == 46){
@@ -171,10 +167,7 @@ public class Controleur {
             while (z < this.ANoeud.size()){
                 if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
                     compteur = 1;
-                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
-                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
                     debutBarre = this.ANoeud.get(z);
-                    //System.out.println(ANoeud);
                     this.changeEtat(51);
                     z = this.ANoeud.size() + 1;
                 }
@@ -200,14 +193,8 @@ public class Controleur {
             while (z < this.ANoeud.size()){
                 if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
                     compteur = 1;
-                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
-                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
-                    //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
                     Noeud deb = debutBarre;
-                    //finBarre = this.ANoeud.get(z);
                     Noeud fin = this.ANoeud.get(z);
-                    //Noeud fin = new Noeud(2,new Point(this.ANoeud.get(z).getAbsNoeud(),this.ANoeud.get(z).getOrdNoeud()), col);
-                    //System.out.println(ANoeud);
                     this.vue.getModel().add(deb);
                     this.vue.getModel().add(fin);
                     TypeBarre tip = new BarreAcier();
@@ -219,7 +206,6 @@ public class Controleur {
                 z = z+1;
             }
             if(compteur == 0){
-                //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
                 Noeud deb = debutBarre;
                 Noeud fin = new Noeud(2,new Point(px2,py2), col);
                 this.vue.getModel().add(deb);
@@ -229,7 +215,6 @@ public class Controleur {
                 Noeud n = new Noeud(2,new Point(px2,py2), col);
                 this.ANoeud.add(n);
                 this.vue.getModel().add(n);
-                //System.out.println(ANoeud);
                 this.vue.redrawAll();
                 this.changeEtat(50);
             }
@@ -242,8 +227,6 @@ public class Controleur {
             while (z < this.ANoeud.size()){
                 if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
                     compteur = 1;
-                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
-                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
                     debutBarre = this.ANoeud.get(z);
                     System.out.println(ANoeud);
                     this.changeEtat(61);
@@ -268,13 +251,8 @@ public class Controleur {
             while (z < this.ANoeud.size()){
                 if ( (px2 > (this.ANoeud.get(z).getAbsNoeud() - 5)) && (px2 < (this.ANoeud.get(z).getAbsNoeud() + 5)) && (py2 > (this.ANoeud.get(z).getOrdNoeud() - 5)) && (py2 < (this.ANoeud.get(z).getOrdNoeud() + 5)) ){
                     compteur = 1;
-                    //this.pos1[0] = this.ANoeud.get(z).getAbsNoeud();
-                    //this.pos1[1] = this.ANoeud.get(z).getOrdNoeud();
-                    //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
                     Noeud deb = debutBarre;
-                    //finBarre = this.ANoeud.get(z);
                     Noeud fin = this.ANoeud.get(z);
-                    //Noeud fin = new Noeud(2,new Point(this.ANoeud.get(z).getAbsNoeud(),this.ANoeud.get(z).getOrdNoeud()), col);
                     System.out.println(ANoeud);
                     this.vue.getModel().add(deb);
                     this.vue.getModel().add(fin);
@@ -287,7 +265,6 @@ public class Controleur {
                 z = z+1;
             }
             if(compteur == 0){
-                //Noeud deb = new Noeud(1,new Point(this.pos1[0],this.pos1[1]), col);
                 Noeud deb = debutBarre;
                 Noeud fin = new Noeud(2,new Point(px2,py2), col);
                 this.vue.getModel().add(deb);
@@ -346,7 +323,6 @@ public class Controleur {
     
     void boutonGrouper(ActionEvent t) {
         if (this.etat == 20 && this.selection.size() > 1) {
-            // normalement le bouton est disabled dans le cas contraire
             Groupe ssGroupe = this.vue.getModel().sousGroupe(selection);
             this.selection.clear();
             this.selection.add(ssGroupe);
@@ -429,7 +405,6 @@ public class Controleur {
             }
         }
     }
-//    }
 
     void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
@@ -443,15 +418,9 @@ public class Controleur {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("A propos");
         alert.setHeaderText(null);
-        alert.setContentText("Trop super ce micro-logiciel de dessin vectoriel 2D\n"
-                + "réalisé par François de Bertrand de Beuvron\n"
-                + "comme tutoriel pour un cours de POO\n"
-                + "à l'INSA de Strasbourg");
-
+        alert.setContentText("Ce logiciel est vraiment génial !\n");
         alert.showAndWait();
     }
-    
-    
     
     public double distanceAlpha(Point p1, Point p2) {
         double dx = p1.getPx() - p2.getPx();

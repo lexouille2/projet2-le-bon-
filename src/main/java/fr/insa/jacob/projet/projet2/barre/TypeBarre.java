@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
  *
  * @author PC
  */
+
 public class TypeBarre{
     
     private int idType;
@@ -22,7 +23,7 @@ public class TypeBarre{
     private Color col;
     
     public TypeBarre(int idType, double cout, double lmin, double lmax, double rmaxt, double rmaxc, Color col){
-        
+
         this.idType = idType;
         this.lmin = lmin;
         this.cout = cout;
@@ -64,12 +65,5 @@ public class TypeBarre{
     public String toString() {
         return "TypeBarre{" + "idType=" + idType + ", cout=" + cout + ", lmin=" + lmin + ", lmax=" + lmax + ", rmaxt=" + rmaxt + ", rmaxc=" + rmaxc + '}';
     }
-    
-    /*    public void save(Writer w, Identificateur<Treillis> num) throws IOException{
-    if(! num.objExist(this)){
-    int id = num.creeID(this);
-    w.append("TypeBarre;"+id+";"+this.cout+";" +this.lmin+";"+this.lmax+";"+ this.rmaxt +";"+ this.rmaxc+"\n");
-    }
-    }*/
-
+   
 }

@@ -26,10 +26,8 @@ public class DessinCanvas extends Pane{
         this.main = main;
         this.realCanvas = new Canvas(this.getWidth(), this.getHeight());
         this.getChildren().add(this.realCanvas);
-        //System.out.println("w = " + this.getWidth() + ", h =" + this.getHeight());
         this.realCanvas.heightProperty().bind(this.heightProperty());
         this.realCanvas.heightProperty().addListener((o)->{
-            //System.out.println("w = " + this.realCanvas.getWidth() + ", h =" + this.realCanvas.getHeight());
             this.redrawAll();
         });
         this.realCanvas.widthProperty().bind(this.widthProperty());

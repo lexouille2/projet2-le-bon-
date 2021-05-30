@@ -16,14 +16,11 @@ import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-
-
-
-
 /**
  *
  * @author PC
  */
+
 public class Point extends FigureSimple{
     
     public static double RAYON_IN_DRAW = 5;
@@ -65,7 +62,6 @@ public class Point extends FigureSimple{
         return "Point{" + "px=" + px + ", py=" + py + '}';
     }
     
-    
     public double distance(Point p2) {
         double dx = this.px - p2.px;
         double dy = this.py - p2.py;
@@ -90,11 +86,5 @@ public class Point extends FigureSimple{
             w.append("Point;"+id+";"+this.px+";"+this.py+";" + FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
-
-    @Override
-    public void suppr(List<Treillis> t) {
-        t = null;
-    }
-
-
+    
 }

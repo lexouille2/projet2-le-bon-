@@ -55,10 +55,6 @@ public class Barre extends FigureSimple{
     public Noeud getN2() {
         return n2;
     }
-
-    /*    public TypeBarre getType() {
-    return type;
-    }*/
     
     public double longueurBarre() {
         double dx = this.n1.getAbsNoeud() - this.n2.getAbsNoeud();
@@ -71,43 +67,12 @@ public class Barre extends FigureSimple{
         return "Barre{" + "idBarre=" + idBarre + ", n1=" + n1 + ", n2=" + n2 + /*", type=" + type + */'}';
     }
     
-    /*public void dessine(GraphicsContext context){
-    //context.setStroke(this.getCouleur());
-    context.strokeLine(this.n1.getPx(), this.n1.getPy(), this.n2.getPx(), this.n2.getPy());
-    }*/
-    
-    /*    public static void test(){
-    Point p1, p2, p3;
-    p1 = new Point(1, 0);
-    p2 = new Point(0, 1);
-    p3 = new Point(1,1);
-    TriangleTerrain TTT = new TriangleTerrain(9, p1, p2, p3);
-    
-    /*Noeud neuu;     // --> test pour savoir si on peut passer de noeud a noeud simple ou appui
-    neuu = new NoeudSimple(3, p1);  // !!! on peut créer un noeud et ENSUITE dire si c'est un noeud simple ou appui
-    neuu = new NoeudAppui(6, p2, TTT, 1);*/
-    
-    /*    Noeud n1, n2;
-    n1 = new Noeud(3, p1);
-    n2 = new Noeud(4, p2);
-    
-    TypeBarre tip = new TypeBarre(1,1,1,1,1,1);
-    Barre bar = new Barre(5, n1, n2, tip);*/
-    
-    //bar.longueur(); // pour la longueur de la barre on s'en fout de savoir quels types de noeuds on a, il nous faut juste 2 noeuds quelconques.
-    /*    System.out.println(bar.longueurBarre());
-    }*/
-    
     public void dessine(GraphicsContext context){
         context.setStroke(this.getCouleur());
         context.strokeLine(this.n1.getAbsNoeud(), this.n1.getOrdNoeud(), this.n2.getAbsNoeud(), this.n2.getOrdNoeud());
         context.fillOval(this.n1.getAbsNoeud()-RAYON_IN_DRAW, this.n1.getOrdNoeud()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
         context.fillOval(this.n2.getAbsNoeud()-RAYON_IN_DRAW, this.n2.getOrdNoeud()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     }
-    
-    /*    public static void main(String[] args) {
-    test();
-    }*/
 
     @Override
     public double distance(Point p) {
@@ -146,10 +111,6 @@ public class Barre extends FigureSimple{
         }
     }
 
-    @Override
-    public void suppr(List<Treillis> t) {
-        t = null;
-    }
 }
     
 

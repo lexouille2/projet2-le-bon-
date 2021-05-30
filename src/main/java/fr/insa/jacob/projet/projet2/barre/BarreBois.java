@@ -16,6 +16,5 @@ public class BarreBois extends TypeBarre{
     public BarreBois() {
         super(1, 5, 1, 5, 142, 52, Color.BROWN);
     }
-    
-    
+
 }

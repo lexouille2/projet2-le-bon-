@@ -19,5 +19,4 @@ public class CatalogueBarre {
         this.catalogue = catalogue;
     }
     
-    
 }

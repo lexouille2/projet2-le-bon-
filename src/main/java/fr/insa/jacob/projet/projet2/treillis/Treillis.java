@@ -35,6 +35,7 @@ import javafx.scene.paint.Paint;
  *
  * @author PC
  */
+
 public abstract class Treillis {
 
     public static Color COULEUR_SELECTION = Color.RED;
@@ -58,9 +59,7 @@ public abstract class Treillis {
     public abstract void changeCouleur(Color value);
     
     public abstract void save(Writer w, Identificateur<Treillis> num) throws IOException;
-    
-    public abstract void suppr(List<Treillis> t);
-    
+        
     public void sauvegarde(File fout) throws IOException {
         Identificateur<Treillis> num = new Identificateur<Treillis>();
         try (BufferedWriter bout = new BufferedWriter(new FileWriter(fout))) {
@@ -170,8 +169,10 @@ public abstract class Treillis {
         int nbb = aba.size(); //nb de barres
         int nbas = anas.size(); //nb d'appui simple
         int nbad = anad.size(); //nb d'appui double
+       
         int ni = nbb + nbas + 2*nbad; //nb d'inconnues
-        System.out.println("Nombre d'inconnues : " + ni); //6
+        
+        System.out.println("Nombre d'inconnues : " + ni); // ici 6
         Matrice mat = new Matrice(ni,ni);
         double a = Math.sqrt(2)/2;
         int i = 0; // ligne 
@@ -217,8 +218,6 @@ public abstract class Treillis {
     public static void main(String[] args) {
         testTreillis();
     }
-    
-    
     
 }
 

@@ -117,11 +117,5 @@ public class TriangleTerrain extends FigureSimple{
             w.append("Triangle Terrain" + ";" + id + ";" + num.getID(this.p1) + ";" + num.getID(this.p2) + ";" + num.getID(this.p3) + ";" + FigureSimple.saveColor(this.getCouleur()) + "\n");
         }
     }
-
-    @Override
-    public void suppr(List<Treillis> t) {
-        t = null;
-    }
-    
     
 }

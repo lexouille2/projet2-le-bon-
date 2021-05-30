@@ -35,7 +35,6 @@ public class Groupe extends Treillis{
         this.grpT = new ArrayList<Treillis>();
     }
     
-    
     public void add(Treillis t){
         if (t.getGrp() != this){
             if (t.getGrp() != null){
@@ -79,7 +78,6 @@ public class Groupe extends Treillis{
         }
     }
     
-    
     public void remove(Treillis t) {
         if (t.getGrp() != this) {
             throw new Error("la figure n'est pas dans le groupe");
@@ -93,28 +91,6 @@ public class Groupe extends Treillis{
             this.remove(t);
         }
     }
-        
-    public static Groupe groupeTest(){
-    Point p1 = new Point (10,10);
-    Point p2 = new Point (100,10);
-    Point p3 = new Point (10,100);
-    Noeud n4 = new Noeud (1,p1);
-    Noeud n5 = new Noeud (2,p2);
-    Noeud n6 = new Noeud (3,p3);
-    TypeBarre tip = new BarreBois();
-    TypeBarre teep = new BarreAcier();
-    Barre b1 = new Barre(8, n4, n5, tip);
-    Barre b2 = new Barre(8, n4, n6, teep);
-    Groupe grpfS = new Groupe();
-    grpfS.add(b1);
-    grpfS.add(b2);
-    grpfS.add(n6);
-    return grpfS;
-    }
-    
-    /*    public static void main(String[] args) {
-    System.out.println(groupeTest());
-    }*/
 
     @Override
     public double distance(Point p) {
@@ -139,7 +115,6 @@ public class Groupe extends Treillis{
         }
     }
     
-
     public void changeCouleur(Color value) {
         for (Treillis t : this.grpT) {
             t.changeCouleur(value);
@@ -147,8 +122,6 @@ public class Groupe extends Treillis{
     }
 
     public Groupe sousGroupe(List<Treillis> lt) {
-        // verifie que les figures font actuellement partie du groupe
-        // et les enleve du groupe
         for (int i = 0; i < lt.size(); i++) {
             Treillis t = lt.get(i);
             if (t.getGrp() != this) {
@@ -164,7 +137,6 @@ public class Groupe extends Treillis{
         this.add(sg);
         return sg;
     }
-    
     
     @Override
     public void save(Writer w, Identificateur<Treillis> num) throws IOException{
@@ -194,43 +166,6 @@ public class Groupe extends Treillis{
         return prefix + toIndente.replaceAll("\n", "\n" + prefix);
     }
     
-    public static void exempleProblemeSauvegarde() {
-        Point p11 = new Point(1, 1);
-        Point p12 = new Point(2, 2);
-        Point p13 = new Point(2, 2);
-        Point p14 = new Point(3, 3);
-        Noeud n11 = new Noeud(12,p11);
-        Noeud n12 = new Noeud(13, p12);
-        Noeud n13 = new Noeud(14, p13);
-        Noeud n14 = new Noeud(15, p14);
-        TypeBarre type = new BarreAcier();
-        Barre s11 = new Barre(3, n11, n12, type);
-        Barre s12 = new Barre(5, n13, n14, type);
-        Groupe gr1 = new Groupe();
-        gr1.add(s11);
-        gr1.add(s12);
-        Point p21 = new Point(1, 1);
-        Point p22 = new Point(2, 2);
-        Point p24 = new Point(3, 3);
-        Noeud n21 = new Noeud(9,p21);
-        Noeud n22 = new Noeud(10, p22);
-        Noeud n24 = new Noeud(11, p24);
-        Barre s21 = new Barre(0,n21, n22, type);
-        Barre s22 = new Barre(3, n22,n24, type);
-        Groupe gr2 = new Groupe();
-        gr2.add(s21);
-        gr2.add(s22);
-        gr2.add(gr1);
-        System.out.println("Groupe 1 : " + gr1);
-        System.out.println("Groupe 2 : " + gr2);
-        try {
-            gr1.sauvegarde(new File("groupe1.txt"));
-            gr2.sauvegarde(new File("groupe2.txt"));
-        } catch (IOException ex) {
-            throw new Error("probleme : " + ex.getMessage());
-        }
-    }
-    
     public static void testLecture() {
         try {
             Treillis lu = Treillis.lecture(new File("groupe2.txt"));
@@ -238,16 +173,6 @@ public class Groupe extends Treillis{
             } catch (IOException ex) {
             throw new Error(ex);
         }
-    }
-
-    public static void main(String[] args) {
-        exempleProblemeSauvegarde();
-        //testLecture();
-    }
-
-    @Override
-    public void suppr(List<Treillis> t) {
-        t = null;
     }
 
 }

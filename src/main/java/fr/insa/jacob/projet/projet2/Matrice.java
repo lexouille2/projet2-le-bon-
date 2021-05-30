@@ -13,6 +13,7 @@ import java.util.Optional;
  *
  * @author yohann
  */
+
 public class Matrice {
     
     private int nbrLig;
@@ -44,8 +45,6 @@ public class Matrice {
     }
 
     public String toString() {
-        // oui, il serait plus efficace d'utiliser un {@link java.lang.StringBuilder}
-        // mais ils n'ont pas été vu
         String res = "";
         for (int i = 0; i < nbrLig; i++) {
             res = res + "[";
@@ -77,8 +76,6 @@ public class Matrice {
     }
 
     public static String formatDouble(double x) {
-//        return formatDouble2Digits(x);
-//        return formatDoubleMax2Decimales(x);
         return formatDoubleFixe(x);
     }
 
@@ -95,7 +92,6 @@ public class Matrice {
         return String.format("%+4.2E", x);
     }
 
-    //--------------- partie 2.1
     public Matrice concatLig(Matrice m2) {
         if (this.getNbrCol() != m2.getNbrCol()) {
             throw new Error("les matrices doivent avoir même nombre de colonnes");

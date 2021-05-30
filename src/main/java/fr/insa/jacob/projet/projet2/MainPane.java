@@ -27,8 +27,6 @@ import javafx.stage.Stage;
  * @author PC
  */
 
-//this est un MainPane c'est la fenêtre
-
 public class MainPane extends BorderPane{
     
     private Groupe model;
@@ -104,7 +102,6 @@ public class MainPane extends BorderPane{
         this.bGrouper = new Button ("Grouper");
         this.bGrouper.setOnAction((t)->{
             this.controleur.boutonGrouper(t);
-            //System.out.println("bouton Grouper cliqué");
         });
         
         this.bSupprimer = new Button("Supprimer");
@@ -115,7 +112,6 @@ public class MainPane extends BorderPane{
         
         this.cpCouleur = new ColorPicker(Color.BLACK);
         this.cpCouleur.setOnAction((t)->{
-            //System.out.println("Bouton couleur ");
             this.controleur.changeColor(this.cpCouleur.getValue());
         });
         
@@ -201,7 +197,7 @@ public class MainPane extends BorderPane{
         return cDessin;
     }
     
-        /**
+    /**
      * @return the cpCouleur
      */
     public ColorPicker getCpCouleur() {

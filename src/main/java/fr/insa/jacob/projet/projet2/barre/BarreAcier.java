@@ -9,17 +9,12 @@ import javafx.scene.paint.Color;
 
 /**
  *
- * @author yohan
+ * @author yohann
  */
 public class BarreAcier extends TypeBarre{
     
     public BarreAcier() {
         super(1, 10, 1, 5, 300, 150, Color.GREY);
     }
-    
-    
-    
-    
-    
     
 }

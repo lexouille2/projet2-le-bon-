@@ -13,6 +13,7 @@ import java.util.TreeMap;
  *
  * @author PC
  */
+
 public class Identificateur<TO> {
     
     private TreeMap<Integer,TO> idVersObjet;
@@ -78,6 +79,5 @@ public class Identificateur<TO> {
         this.idVersObjet.put(id, obj);
         this.objetVersId.put(obj, id);
     }
-    
     
 }

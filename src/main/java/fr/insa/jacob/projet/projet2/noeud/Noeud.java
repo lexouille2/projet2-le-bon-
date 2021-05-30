@@ -72,10 +72,5 @@ public class Noeud extends FigureSimple{
         }
     }
 
-    @Override
-    public void suppr(List<Treillis> t) {
-        t= null;
-    }
-
 }
 

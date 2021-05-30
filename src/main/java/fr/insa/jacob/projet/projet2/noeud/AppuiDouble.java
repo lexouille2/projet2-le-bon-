@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
  *
  * @author yohann
  */
+
 public class AppuiDouble extends NoeudAppui{
 
     public AppuiDouble(int num, Point debutSeg, Point finSeg, int idNoeud, Point ne, Color couleur) {
@@ -20,7 +21,5 @@ public class AppuiDouble extends NoeudAppui{
     public AppuiDouble(int num, Point debutSeg, Point finSeg, int idNoeud, Point ne) {
         super(num, debutSeg, finSeg, idNoeud, ne);
     }
-    
-    
     
 }
